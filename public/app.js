@@ -2,6 +2,7 @@
  * Created by mario.salgado on 22/12/16.
  */
 
+ var playerid;
 // Send messages to server
 var socket = io(window.location.origin + ":3000");
 $('form').submit(function(){
@@ -14,7 +15,7 @@ $('form').submit(function(){
 socket.on('chat message', function(msg){
     console.log('text');
     $('#messages').append($('<li>').text("x:"+msg));
-}); 
+});
 
 // get generic state events from server
 socket.on('event', function(msg){
@@ -25,6 +26,7 @@ socket.on('event', function(msg){
 
     if ('setId' in msg) {
       $('#messages').append($('<li>').text('my id is ' + msg.setId));
+      playerid = msg.setId;
     }
 
     if ('setStamina' in msg) {

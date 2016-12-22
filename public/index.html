@@ -14,6 +14,7 @@
     var staminaBarUnitScreenWidth = 90;
     var staminaBar;
     var gameScene;
+    var menu;
           window.onload = function(){
               cc.game.onStart = function(){
                   //load resources
@@ -45,8 +46,14 @@
                               var staminaBarBG = cc.LayerColor.create(cc.color(0,0,0,255), staminaBarUnitScreenWidth*10 + 10, staminaBar.height + 10);
                               staminaBarBG.x = staminaBar.x - 5;
                               staminaBarBG.y = staminaBar.y - 5
+
                               this.addChild(staminaBarBG, 1);
                               this.addChild(staminaBar, 2);
+
+                              menu = cc.Menu.create();
+                              menu.x -= size.width/2;
+                              menu.y -= size.height/2;
+                              this.addChild(menu);
                           }
                       });
                       gameScene = new MyScene();

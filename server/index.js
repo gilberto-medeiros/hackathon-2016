@@ -47,10 +47,8 @@ io.on('connection', function(socket){
         //socket.broadcast.emit('event', 'a user disconnected');
         socket.broadcast.emit('event', {txt : 'player ' + player.id + ' left'});
     });
-
     socket.on('play card', function(msg) {
-        console.log('message '+ msg);
-    });
+      console.log('message '+ msg.handIndex);
 
     match.addPlayer(player);
 
