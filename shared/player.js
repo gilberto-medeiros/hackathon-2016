@@ -1,5 +1,6 @@
 class Player {
-  constructor(deck, headHealth, bodyHealth, legHealth, stamina) {
+  constructor(deck, headHealth, bodyHealth, legHealth, stamina, playerId) {
+    this.id = playerId;
     this.deck = deck;
     this.headHealth = headHealth;
     this.bodyHealth = bodyHealth;

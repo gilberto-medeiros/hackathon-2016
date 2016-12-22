@@ -6,6 +6,9 @@
 <body>
     <canvas id="gameCanvas" width="1024" height="768"></canvas>
     <script type="text/javascript" src="cocos2d-js-v3.12/cocos2d-js-v3.12.js" charset="UTF-8"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="//localhost:35729/livereload.js"></script>
     <script type="text/javascript">
           window.onload = function(){
               cc.game.onStart = function(){
@@ -31,46 +34,10 @@
               cc.game.run("gameCanvas");
           };
     </script>
-
     <ul id="messages"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>
 </body>
-<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-<script src="//localhost:35729/livereload.js"></script>
-<script>
-  console.log('window is ' + window.location.origin);
-
-  // Send messages to server
-  var socket = io(window.location.origin + ":3000");
-  $('form').submit(function(){
-    socket.emit('chat message', $('#m').val());
-    $('#m').val('');
-    return false;
-  });
-
-  // get chat messages from server
-  socket.on('chat message', function(msg){
-    console.log('text');
-    $('#messages').append($('<li>').text("x:"+msg));
-  });
-
-  // get generic state events from server
-  socket.on('event', function(msg){
-    console.log(msg);
-    var p = new Polygon(100, 200);
-
-    console.log(msg);
-    $('#messages').append($('<li><b>').text("w"+msg.txt));
-  });
-
-  class Polygon {
-    constructor(height, width) {
-      this.height = height;
-      this.width = width;
-    }
-  }
-</script>
+<script type="text/javascript" src="app.js" charset="UTF-8"></script>
 </html>
