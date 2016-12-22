@@ -41,30 +41,9 @@ io.on('connection', function(socket){
       io.emit('chat message', msg);
     });
 
-    // process a disconnected
-    socket.on('disconnect', function() {
-        console.log('user disconnected');
-        //socket.broadcast.emit('event', 'a user disconnected');
-        socket.broadcast.emit('event', {txt : 'player ' + player.id + ' left'});
-    });
-    socket.on('play card', function(msg) {
-      console.log('message '+ msg.handIndex);
-
     match.addPlayer(player);
 
     if (match.isMatchFull()) {
-        waitInterval = setInterval(wait, 3000, 1000);
-        console.log('match is starting');
-        io.emit('event', {txt : 'match ' + match.id + ' is starting'});
+        match.start();
     }
 });
-
-function wait() {
-    clearInterval(waitInterval);
-    setInterval(tick, 1000, 1000);
-    match.sendHandsToPlayers();
-}
-
-function tick(delta) {
-    match.tick();
-}
