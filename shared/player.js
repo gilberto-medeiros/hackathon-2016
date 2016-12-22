@@ -1,3 +1,8 @@
+var HeadLane = require('../shared/headLane');
+var BodyLane = require('../shared/bodyLane');
+var LegsLane = require('../shared/legsLane');
+
+
 class Player {
   constructor(deck, headHealth, bodyHealth, legHealth, stamina, playerId) {
     this.id = playerId;
@@ -6,6 +11,9 @@ class Player {
     this.bodyHealth = bodyHealth;
     this.legHealth =  legHealth;
     this.stamina = stamina;
+    this.headLane = new HeadLane();
+    this.bodyLane = new BodyLane();
+    this.legsLane = new LegsLane();
   }
 
   print() {
@@ -20,7 +28,7 @@ class Player {
   }
 
   tick() {
-    this.addStamina(1);
+    this.addStamina(3+this.headLane.getBonus());
   }
 }
 

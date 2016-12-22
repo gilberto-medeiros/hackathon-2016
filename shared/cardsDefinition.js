@@ -17,7 +17,7 @@ class CardsDefinition {
 
   getCardDefinition(id) {
     for (var cardIndex in this.allCards.cards) {
-      if(this.allCards.cards[cardIndex].id == id) return this.allCards.cards[cardIndex]
+      if(this.allCards.cards[cardIndex].id == id) return this.allCards.cards[cardIndex];
     }
   }
 

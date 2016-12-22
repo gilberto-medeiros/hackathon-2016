@@ -9,12 +9,16 @@
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="//localhost:35729/livereload.js"></script>
+    <script type="text/javascript" src="cardVisual.js" charset="UTF-8"></script>
     <script type="text/javascript">
+    var staminaBarUnitScreenWidth = 90;
+    var staminaBar;
+    var gameScene;
           window.onload = function(){
               cc.game.onStart = function(){
                   //load resources
                   cc.LoaderScene.preload(["HelloWorld.png"], function () {
-                      var MyScene = cc.Scene.extend({
+                      MyScene = cc.Scene.extend({
                           onEnter:function () {
                               this._super();
                               var size = cc.director.getWinSize();
@@ -26,9 +30,21 @@
                               var label = cc.LabelTTF.create("Hello World", "Arial", 40);
                               label.setPosition(size.width / 2, size.height / 2);
                               this.addChild(label, 1);
+
+
+                              staminaBar = cc.LayerColor.create(cc.color(0,0,255,255), staminaBarUnitScreenWidth, 30);
+                              staminaBar.x = 70;
+                              staminaBar.y = 5;
+
+                              var staminaBarBG = cc.LayerColor.create(cc.color(0,0,0,255), staminaBarUnitScreenWidth*10 + 10, staminaBar.height + 10);
+                              staminaBarBG.x = staminaBar.x - 5;
+                              staminaBarBG.y = staminaBar.y - 5
+                              this.addChild(staminaBarBG);
+                              this.addChild(staminaBar);
                           }
                       });
-                      cc.director.runScene(new MyScene());
+                      gameScene = new MyScene();
+                      cc.director.runScene(gameScene);
                   }, this);
               };
               cc.game.run("gameCanvas");

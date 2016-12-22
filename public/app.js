@@ -29,10 +29,22 @@ socket.on('event', function(msg){
 
     if ('setStamina' in msg) {
       $('#messages').append($('<li>').text('stamina ' + msg.setStamina));
+      staminaBar.width = staminaBarUnitScreenWidth*msg.setStamina;
+    }
+
+    if ('setHand' in msg) {
+      $('#messages').append($('<li>').text('hand ' + msg.setHand));
+      CreateHand(msg.setHand)
+      //staminaBar.width = staminaBarUnitScreenWidth*msg.setStamina;
     }
 });
 
 var cardDefs;
+function getCardDefById(cardId) {
+  for (var cardIndex in cardDefs.cards) {
+    if(cardDefs.cards[cardIndex].id == cardId) return cardDefs.cards[cardIndex];
+  }
+}
 $.getJSON('../shared/cards.json', function(response){
     cardDefs = response;
     console.log(cardDefs.cards[0].id);
