@@ -24,8 +24,8 @@ class Match {
         return true;
     }
 
-    addActiveCard(cardID) {
-        this.activeCards[palyer.id] = cardID;
+    addActiveCard(playerID, handIndex) {
+        this.activeCards[playerID] = handIndex;
     }
 
     sendHandsToPlayers() {

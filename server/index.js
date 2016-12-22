@@ -41,7 +41,14 @@ io.on('connection', function(socket){
       io.emit('chat message', msg);
     });
 
+
+    socket.on('play card', function(msg) {
+      //console.log('playerid: ' + msg.playerid + ' - cardidx: ' + msg.handIndex);
+      match.addActiveCard(msg.playerid, msg.handIndex)
+    });
+
     match.addPlayer(player);
+
 
     if (match.isMatchFull()) {
         match.start();
