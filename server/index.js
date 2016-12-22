@@ -57,6 +57,10 @@ class Match {
     this.activeCards[palyer.id] = cardID;
   }
 
+  resolution() {
+
+  }
+
   isMatchFull() {
     return this.players.length == 2;
   }
@@ -94,6 +98,11 @@ io.on('connection', function(socket){
     socket.on('chat message', function(msg) {
       console.log('message '+ msg);
       io.emit('chat message', msg);
+    });
+
+    socket.on('play card', function(msg) {
+      console.log('message '+ msg);
+      
     });
 
     if (match.isMatchFull()) {
