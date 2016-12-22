@@ -2,7 +2,8 @@
  * Created by mario.salgado on 22/12/16.
  */
 class Match {
-    constructor() {
+    constructor(id) {
+        this.id = id;
         this.players = new Array();
         this.activeCards = new Array();
     }

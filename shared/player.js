@@ -4,8 +4,9 @@ var LegsLane = require('../shared/legsLane');
 
 
 class Player {
-  constructor(deck, headHealth, bodyHealth, legHealth, stamina, playerId) {
+  constructor(deck, headHealth, bodyHealth, legHealth, stamina, playerId, matchId) {
     this.id = playerId;
+    this.matchId = matchId;
     this.deck = deck;
     this.headHealth = headHealth;
     this.bodyHealth = bodyHealth;
