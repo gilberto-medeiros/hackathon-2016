@@ -4,7 +4,18 @@ class Player {
     this.headHealth = headHealth;
     this.bodyHealth = bodyHealth;
     this.legHealth =  legHealth;
-    this.stamina = stamina
+    this.stamina = stamina;
+  }
+
+  consumeCard(cardIndex) {
+    this.deck.hand.splice(cardIndex, 1);
+    addCardToHand()
+  }
+
+  addCardToHand() {
+    while (this.deck.hand.lenght < 5) {
+      this.deck.hand.push(this.deck.deckDefinition[Math.floor(Math.random() * this.deck.deckDefinition.length)])
+    }
   }
 
   print() {
