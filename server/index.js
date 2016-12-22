@@ -5,11 +5,10 @@ var fs = require("fs");
 var path = require("path");
 
 var Player = require('../shared/player');
+var CardsDefinition = require('../shared/cardsDefinition');
 
-var public_host = 'http://localhost/public/cocos2d-js-v3.12/'
+var public_host = 'http://localhost/public/cocos2d-js-v3.12/';
 
-var content = fs.readFileSync("shared/cards.json");
-var json = JSON.parse(content);
 console.log("asodqswe " + json.cards[0].id);
 
 /*
@@ -45,6 +44,8 @@ io.on('connection', function(socket){
   console.log('a user connected. id=' + playerid++);
   socket.broadcast.emit('event', {txt : 'a user connected'});
   //socket.broadcast.emit('event', 'a user connected');
+
+
 
   //var p = new Polygon(100, 200);
   //console.log('awesonme ' + p.height);
