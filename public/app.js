@@ -14,7 +14,7 @@ $('form').submit(function(){
 socket.on('chat message', function(msg){
     console.log('text');
     $('#messages').append($('<li>').text("x:"+msg));
-});
+}); 
 
 // get generic state events from server
 socket.on('event', function(msg){
