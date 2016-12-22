@@ -4,22 +4,28 @@
 class Match {
     constructor(id) {
         this.id = id;
-        this.players = new Array();
-        this.activeCards = new Array();
+        this.players = [];
+        this.activeCards = [];
     }
 
     addPlayer(player) {
-        if(player.length == 2) {
-            console.log("###### IGNORING PLAYER");
-            return false;
-        }
         console.log('a player connected. id=' + player.id);
+        //TODO: Change this to other place in the class.
+        // process a disconnected
+        player.socket.on('disconnect', function() {
+            console.log('user disconnected');
+            //socket.broadcast.emit('event', 'a user disconnected');
+            player.socket.broadcast.emit('event', {txt : 'player ' + player.id + ' left'});
+        });
+        player.socket.on('play card', function(msg) {
+            console.log('message '+ msg.handIndex);
+        });
         this.players.push(player);
         return true;
     }
 
-    addActiveCard(cardID) {
-        this.activeCards[palyer.id] = cardID;
+    addActiveCard(playerID, handIndex) {
+        this.activeCards[playerID] = handIndex;
     }
 
     sendHandsToPlayers() {
@@ -38,14 +44,25 @@ class Match {
         return this.players.length == 2;
     }
 
-    tick() {
-        for (var playerIndex in this.players) {
-            var player = this.players[playerIndex];
-            player.tick();
-
-            // send stamina update
-            player.socket.emit('event', {'setStamina': player.stamina});
-        }
+    start(){
+        var waitInterval;
+        var ref = this;
+        waitInterval = setInterval(function(){
+            clearInterval(waitInterval);
+            setInterval(function(){
+                //console.log(ref.players);
+                for (var playerIndex in ref.players) {
+                    var player = ref.players[playerIndex];
+                    player.tick();
+                    // send stamina update
+                    player.socket.emit('event', {'setStamina': player.stamina});
+                }
+            }, 1000, 1000);
+            ref.sendHandsToPlayers();
+            
+        }, 3000, 1000);
+        console.log('match is starting');
+        //io.emit('event', {txt : 'match ' + match.id + ' is starting'});
     }
 }
 
