@@ -9,6 +9,7 @@ class Match {
     }
 
     addPlayer(player) {
+        var ref = this;
         console.log('a player connected. id=' + player.id);
         //TODO: Change this to other place in the class.
         // process a disconnected
@@ -18,7 +19,9 @@ class Match {
             player.socket.broadcast.emit('event', {txt : 'player ' + player.id + ' left'});
         });
         player.socket.on('play card', function(msg) {
-            console.log('message '+ msg.handIndex);
+            console.log('card '+ msg.handIndex + ' from player ' + msg.playerid);
+
+            ref.addActiveCard(msg.playerid, msg.handIndex)
         });
         this.players.push(player);
         return true;
@@ -59,8 +62,8 @@ class Match {
                 }
             }, 1000, 1000);
             ref.sendHandsToPlayers();
-            
-        }, 3000, 1000);
+
+        }, 3000, 3000);
         console.log('match is starting');
         //io.emit('event', {txt : 'match ' + match.id + ' is starting'});
     }

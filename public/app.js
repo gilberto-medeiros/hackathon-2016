@@ -30,14 +30,13 @@ socket.on('event', function(msg){
     }
 
     if ('setStamina' in msg) {
-      $('#messages').append($('<li>').text('stamina ' + msg.setStamina));
+      //$('#messages').append($('<li>').text('stamina ' + msg.setStamina));
       staminaBar.width = staminaBarUnitScreenWidth*msg.setStamina;
     }
 
     if ('setHand' in msg) {
       $('#messages').append($('<li>').text('hand ' + msg.setHand));
       CreateHand(msg.setHand)
-      //staminaBar.width = staminaBarUnitScreenWidth*msg.setStamina;
     }
 });
 
