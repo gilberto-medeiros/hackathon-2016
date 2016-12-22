@@ -1,5 +1,8 @@
-
 var fs = require("fs");
+var Block = require("../shared/block");
+var Attack = require("../shared/attack");
+var Counter = require("../shared/counter");
+
 
 class CardsDefinition {
 
@@ -15,6 +18,42 @@ class CardsDefinition {
   getCardDefinition(id) {
     for (var cardIndex in this.allCards.cards) {
       if(this.allCards.cards[cardIndex].id == id) return this.allCards.cards[cardIndex]
+    }
+  }
+
+  createCard(cardDef){
+    if(cardDef.type == 'Attack'){
+        return new Attack(
+            cardDef.id,
+            cardDef.part,
+            cardDef.name,
+            cardDef.target,
+            cardDef.power,
+            cardDef.special,
+            cardDef.cost
+        );
+    }else if(cardDef.type == 'Block'){
+        return new Block(
+            cardDef.id,
+            cardDef.part,
+            cardDef.name,
+            cardDef.target,
+            cardDef.power,
+            cardDef.special,
+            cardDef.cost
+        );
+    }else if(cardDef.type == 'Counter'){
+        return new Counter(
+            cardDef.id,
+            cardDef.part,
+            cardDef.name,
+            cardDef.target,
+            cardDef.power,
+            cardDef.special,
+            cardDef.cost
+        );
+    }else{
+      console.log("Missing card with id " + id + ".");
     }
   }
 
