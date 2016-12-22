@@ -55,6 +55,16 @@ class Match {
   isMatchFull() {
     return this.players.length == 2;
   }
+
+  tick() {
+    for (var playerIndex in this.players) {
+      var player = this.players[playerIndex];
+      player.tick();
+
+      // send stamina update
+      player.socket.emit('event', {'setStamina': player.stamina});
+    }
+  }
 }
 
 var playerid = 0;
@@ -63,6 +73,7 @@ var match = new Match;
 io.on('connection', function(socket){
   var p = new Player(deckDefinition.createDeck(), 0,0,0,0, playerid++);
   if (match.addPlayer(p)) {
+    p.socket = socket;
     //console.log('a user connected. id=' + playerid++);
     socket.emit('event', {txt : 'you connected with id ' + p.id, 'setId': p.id});
     //socket.broadcast.emit('event', {txt : 'you connected with id ' + p.id});
@@ -81,7 +92,7 @@ io.on('connection', function(socket){
     });
 
     if (match.isMatchFull()) {
-      setInterval(tick, 100, 100);
+      setInterval(tick, 1000, 1000);
       console.log('match is starting');
       io.emit('event', {txt : 'match is starting'});
     }
@@ -91,8 +102,6 @@ io.on('connection', function(socket){
   }
 });
 
-setInterval(tick, 100, 100);
-
-function tick() {
-  //console.log('tick');
+function tick(delta) {
+  match.tick();
 }

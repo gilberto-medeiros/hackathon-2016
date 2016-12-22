@@ -1,7 +1,6 @@
 /**
  * Created by mario.salgado on 22/12/16.
  */
-console.log('window is ' + window.location.origin);
 
 // Send messages to server
 var socket = io(window.location.origin + ":3000");
@@ -19,11 +18,18 @@ socket.on('chat message', function(msg){
 
 // get generic state events from server
 socket.on('event', function(msg){
-    console.log(msg);
-    //var p = new Polygon(100, 200);
+    if ('txt' in msg) {
+      console.log(msg);
+      $('#messages').append($('<li>').text(msg.txt));
+    }
 
-    console.log(msg);
-    $('#messages').append($('<li><b>').text(msg.txt));
+    if ('setId' in msg) {
+      $('#messages').append($('<li>').text('my id is ' + msg.setId));
+    }
+
+    if ('setStamina' in msg) {
+      $('#messages').append($('<li>').text('stamina ' + msg.setStamina));
+    }
 });
 
 var cardDefs;

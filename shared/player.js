@@ -11,6 +11,17 @@ class Player {
   print() {
     console.log("awesome sdfwe " + this.legHealth);
   }
+
+  addStamina(stamina) {
+    this.stamina += stamina;
+    if (this.stamina > 10) {
+      this.stamina = 10;
+    }
+  }
+
+  tick() {
+    this.addStamina(1);
+  }
 }
 
 module.exports = Player;
