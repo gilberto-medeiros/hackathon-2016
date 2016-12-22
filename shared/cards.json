@@ -1,20 +1,21 @@
-{"cards":[
-  {"id":"liver-kick",         "type":"Attack",  "name":"Liver Kick",         "target":"Body", "power":5, "special":"KO", "cost":0},
-  {"id":"liver-shot",         "type":"Attack",  "name":"Liver Shot",         "target":"Body", "power":4, "special":"KO", "cost":0},
-  {"id":"body-uppercut",      "type":"Attack",  "name":"Body Uppercut",      "target":"Body", "power":3, "special":"",   "cost":0},
-  {"id":"flying-knee",        "type":"Attack",  "name":"Flying Knee",        "target":"Head", "power":5, "special":"KO", "cost":0},
-  {"id":"head-kick",          "type":"Attack",  "name":"Head Kick",          "target":"Head", "power":4, "special":"KO", "cost":0},
-  {"id":"hook",               "type":"Attack",  "name":"Hook",               "target":"Head", "power":3, "special":"KO", "cost":0},
-  {"id":"overhead-punch",     "type":"Attack",  "name":"Overhead Punch",     "target":"Head", "power":4, "special":"KO", "cost":0},
-  {"id":"spinning-back-fist", "type":"Attack",  "name":"Spinning Back Fist", "target":"Head", "power":3, "special":"KO", "cost":0},
-  {"id":"superman-punch",     "type":"Attack",  "name":"Superman Punch",     "target":"Head", "power":4, "special":"KO", "cost":0},
-  {"id":"head-uppercut",      "type":"Attack",  "name":"Head Uppercut",      "target":"Head", "power":4, "Special":"KO", "cost":0},
-  {"id":"low-kick",           "type":"Attack",  "name":"Low Kick",           "target":"Legs", "power":2, "Special":"",   "cost":0},
-  {"id":"body-block",         "type":"Block",   "name":"Body Block",         "target":"Body", "power":4, "Special":"",   "cost":0},
-  {"id":"head-block",         "type":"Block",   "name":"Head Block",         "target":"Head", "power":4, "Special":"",   "cost":0},
-  {"id":"low-kick-check",     "type":"Block",   "name":"Low Kick Check",     "target":"Legs", "power":4, "Special":"",   "cost":0},
-  {"id":"front-kick",         "type":"Counter", "name":"Front Kick",         "target":"Body", "power":2, "Special":"",   "cost":0},
-  {"id":"jab",                "type":"Counter", "name":"Jab",                "target":"Head", "power":1, "Special":"",   "cost":0},
-  {"id":"straight",           "type":"Counter", "name":"Straight",           "target":"Head", "power":2, "Special":"",   "cost":0}
-]
+{
+  "cards":[
+    {"id":"liver-kick",         "type":"Attack",  "part":"Legs", "name":"Liver Kick",         "target":"Body", "power":5, "special":"KO", "cost":0},
+    {"id":"liver-shot",         "type":"Attack",  "part":"Arms", "name":"Liver Shot",         "target":"Body", "power":4, "special":"KO", "cost":0},
+    {"id":"body-uppercut",      "type":"Attack",  "part":"Arms", "name":"Body Uppercut",      "target":"Body", "power":3, "special":"",   "cost":0},
+    {"id":"flying-knee",        "type":"Attack",  "part":"Legs", "name":"Flying Knee",        "target":"Head", "power":5, "special":"KO", "cost":0},
+    {"id":"head-kick",          "type":"Attack",  "part":"Legs", "name":"Head Kick",          "target":"Head", "power":4, "special":"KO", "cost":0},
+    {"id":"hook",               "type":"Attack",  "part":"Arms", "name":"Hook",               "target":"Head", "power":3, "special":"KO", "cost":0},
+    {"id":"overhead-punch",     "type":"Attack",  "part":"Arms", "name":"Overhead Punch",     "target":"Head", "power":4, "special":"KO", "cost":0},
+    {"id":"spinning-back-fist", "type":"Attack",  "part":"Arms", "name":"Spinning Back Fist", "target":"Head", "power":3, "special":"KO", "cost":0},
+    {"id":"superman-punch",     "type":"Attack",  "part":"Arms", "name":"Superman Punch",     "target":"Head", "power":4, "special":"KO", "cost":0},
+    {"id":"head-uppercut",      "type":"Attack",  "part":"Arms", "name":"Head Uppercut",      "target":"Head", "power":4, "Special":"KO", "cost":0},
+    {"id":"low-kick",           "type":"Attack",  "part":"Legs", "name":"Low Kick",           "target":"Legs", "power":2, "Special":"",   "cost":0},
+    {"id":"body-block",         "type":"Block",                  "name":"Body Block",         "target":"Body", "power":4, "Special":"",   "cost":0},
+    {"id":"head-block",         "type":"Block",                  "name":"Head Block",         "target":"Head", "power":4, "Special":"",   "cost":0},
+    {"id":"low-kick-check",     "type":"Block",                  "name":"Low Kick Check",     "target":"Legs", "power":4, "Special":"",   "cost":0},
+    {"id":"front-kick",         "type":"Counter", "part":"Legs", "name":"Front Kick",         "target":"Body", "power":2, "Special":"",   "cost":0},
+    {"id":"jab",                "type":"Counter", "part":"Arms", "name":"Jab",                "target":"Head", "power":1, "Special":"",   "cost":0},
+    {"id":"straight",           "type":"Counter", "part":"Arms", "name":"Straight",           "target":"Head", "power":2, "Special":"",   "cost":0}
+  ]
 }
