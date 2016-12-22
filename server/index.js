@@ -57,13 +57,16 @@ class Match {
     this.activeCards[palyer.id] = cardID;
   }
 
-
   sendHandsToPlayers() {
     for (var playerIndex in this.players) {
       var player = this.players[playerIndex];
       player.socket.emit('event', {'setHand': player.deck.hand});
 
     }
+  }
+
+  resolution() {
+
   }
 
   isMatchFull() {
@@ -103,6 +106,11 @@ io.on('connection', function(socket){
     socket.on('chat message', function(msg) {
       console.log('message '+ msg);
       io.emit('chat message', msg);
+    });
+
+    socket.on('play card', function(msg) {
+      console.log('message '+ msg);
+
     });
 
     if (match.isMatchFull()) {
