@@ -1,13 +1,15 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var fs = require("fs");
 var path = require("path");
 
 var Player = require('../shared/player');
 var CardsDefinition = require('../shared/cardsDefinition');
+var DeckDefinition = require('../shared/deckDefinition');
 
 var public_host = 'http://localhost/public/cocos2d-js-v3.12/';
+var cardsDefinition = new CardsDefinition();
+var deckDefinition =  new DeckDefinition('all-cards', cardsDefinition);
 
 
 /*
@@ -59,32 +61,7 @@ var playerid = 0;
 var match = new Match;
 // accept a connection
 io.on('connection', function(socket){
-<<<<<<< HEAD
-  console.log('a user connected. id=' + playerid++);
-  socket.broadcast.emit('event', {txt : 'a user connected'});
-  //socket.broadcast.emit('event', 'a user connected');
-
-
-
-  //var p = new Polygon(100, 200);
-  //console.log('awesonme ' + p.height);
-  var p = new Player(null, 0,0,0,0);
-  p.print();
-
-  // process a disconnected
-  socket.on('disconnect', function() {
-    console.log('user disconnected');
-    //socket.broadcast.emit('event', 'a user disconnected');
-    socket.broadcast.emit('event', {txt : 'DISCONNECT'});
-  });
-
-  // recieve chat messages from a client
-  socket.on('chat message', function(msg) {
-    console.log('message '+ msg);
-    io.emit('chat message', msg);
-  });
-=======
-  var p = new Player(null, 0,0,0,0, playerid++);
+  var p = new Player(deckDefinition.createDeck(), 0,0,0,0, playerid++);
   if (match.addPlayer(p)) {
     //console.log('a user connected. id=' + playerid++);
     socket.broadcast.emit('event', {txt : 'a user connected'});
@@ -111,7 +88,6 @@ io.on('connection', function(socket){
   else {
 
   }
->>>>>>> origin/master
 });
 
 setInterval(tick, 100, 100);
