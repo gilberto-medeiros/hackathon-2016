@@ -13,27 +13,27 @@ var cardsDefinition = new CardsDefinition();
 var deckDefinition =  new DeckDefinition('all-cards', cardsDefinition);
 
 http.listen(3000, function(){
-  console.log('listening on *:3000');
+    console.log('listening on *:3000');
 
 });
 
-var playerid = 0;
-var match = new Match;
+var playerId = 1;
+var matchId = 1;
+var match = new Match(matchId);
+var matches = [];
+
 // accept a connection
 io.on('connection', function(socket){
-  var p = new Player(deckDefinition.createDeck(), 0,0,0,0, playerid++);
-  if (match.addPlayer(p)) {
-    p.socket = socket;
-    //console.log('a user connected. id=' + playerid++);
-    socket.emit('event', {txt : 'you connected with id ' + p.id, 'setId': p.id});
-    //socket.broadcast.emit('event', {txt : 'you connected with id ' + p.id});
+    if (match.isMatchFull()) {
+        matches[matchId] = match;
+        match = new Match(++matchId);
+    }
 
-    // process a disconnected
-    socket.on('disconnect', function() {
-      console.log('user disconnected');
-      //socket.broadcast.emit('event', 'a user disconnected');
-      socket.broadcast.emit('event', {txt : 'DISCONNECT'});
-    });
+    var player = new Player(deckDefinition.createDeck(), 0,0,0,0, playerId++,matchId);
+
+    player.socket = socket;
+
+    socket.emit('event', {txt : 'you connected with id ' + player.id, 'setId': player.id});
 
     // recieve chat messages from a client
     socket.on('chat message', function(msg) {
@@ -41,28 +41,16 @@ io.on('connection', function(socket){
       io.emit('chat message', msg);
     });
 
+
     socket.on('play card', function(msg) {
       //console.log('playerid: ' + msg.playerid + ' - cardidx: ' + msg.handIndex);
       match.addActiveCard(msg.playerid, msg.handIndex)
     });
 
+    match.addPlayer(player);
+
+
     if (match.isMatchFull()) {
-      waitInterval = setInterval(wait, 3000, 1000);
-      console.log('match is starting');
-      io.emit('event', {txt : 'match is starting'});
+        match.start();
     }
-  }
-  else {
-
-  }
 });
-
-function wait() {
-  clearInterval(waitInterval);
-  setInterval(tick, 1000, 1000);
-  match.sendHandsToPlayers();
-}
-
-function tick(delta) {
-  match.tick();
-}
