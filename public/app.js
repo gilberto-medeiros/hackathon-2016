@@ -23,7 +23,7 @@ socket.on('event', function(msg){
     //var p = new Polygon(100, 200);
 
     console.log(msg);
-    $('#messages').append($('<li><b>').text("w"+msg.txt));
+    $('#messages').append($('<li><b>').text(msg.txt));
 });
 
 var cardDefs;

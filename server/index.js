@@ -66,7 +66,8 @@ io.on('connection', function(socket){
   var p = new Player(null, 0,0,0,0, playerid++);
   if (match.addPlayer(p)) {
     //console.log('a user connected. id=' + playerid++);
-    socket.broadcast.emit('event', {txt : 'a user connected'});
+    socket.emit('event', {txt : 'you connected with id ' + p.id, 'setId': p.id});
+    //socket.broadcast.emit('event', {txt : 'you connected with id ' + p.id});
 
     // process a disconnected
     socket.on('disconnect', function() {
@@ -81,10 +82,10 @@ io.on('connection', function(socket){
       io.emit('chat message', msg);
     });
 
-    if (match.isMatchFull()) { 
+    if (match.isMatchFull()) {
       setInterval(tick, 100, 100);
       console.log('match is starting');
-      socket.broadcast.emit('event', {txt : 'match is starting'});
+      io.emit('event', {txt : 'match is starting'});
     }
   }
   else {
