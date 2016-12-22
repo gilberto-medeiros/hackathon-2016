@@ -40,6 +40,7 @@ http.listen(3000, function(){
 class Match {
   constructor() {
     this.players = new Array();
+    this.activeCards = new Array();
   }
 
   addPlayer(player) {
@@ -52,15 +53,12 @@ class Match {
     return true;
   }
 
-  isMatchFull() {
-    return this.players.length == 2;
+  addActiveCard(cardID) {
+    this.activeCards[palyer.id] = cardID;
   }
 
-  sendHandsToPlayers() {
-    for (var playerIndex in this.players) {
-      var p = this.players[playerIndex];
-      p.socket.emit('event', {'setHand':p.deck.hand});
-    }
+  isMatchFull() {
+    return this.players.length == 2;
   }
 
   tick() {
@@ -99,7 +97,7 @@ io.on('connection', function(socket){
     });
 
     if (match.isMatchFull()) {
-      waitInterval = setInterval(wait, 2000);
+      setInterval(tick, 1000, 1000);
       console.log('match is starting');
       io.emit('event', {txt : 'match is starting'});
     }
@@ -108,13 +106,6 @@ io.on('connection', function(socket){
 
   }
 });
-
-function wait(){
-  console.log('go');
-  setInterval(tick, 1000, 1000);
-  match.sendHandsToPlayers();
-  clearInterval(waitInterval);
-}
 
 function tick(delta) {
   match.tick();
