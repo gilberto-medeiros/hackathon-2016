@@ -13,14 +13,6 @@ class CardVisual {
     this.bg.anchorY = 0;
     gameScene.addChild(this.bg);
 
-    // create the card name
-    var label = cc.LabelTTF.create(this.cardDef.name, "Arial", 16);
-    label.anchorX = 0;
-    label.x = 5;
-    label.y = this.bg.height - 20;
-    this.bg.addChild(label);
-
-
     // create the menu
     var menu = cc.Menu.create();
     var size = cc.director.getWinSize();
@@ -39,11 +31,10 @@ class CardVisual {
     this.menuItem.anchorX = 0;
     this.menuItem.anchorY = 0;
 
-    // cost
-    this.cost = new CardCost(this.cardDef, this);
-
     this.createCardSpecifics();
 
+    this.bg.scale = 0;
+    this.bg.runAction(new cc.ScaleTo(0.4, 1));
     return this.bg;
   }
 
@@ -59,7 +50,15 @@ class CardVisual {
   }
 
   createCardSpecifics() {
-    // check KO
+    // create the card name
+    var label = cc.LabelTTF.create(this.cardDef.name, "Arial", 16);
+    label.anchorX = 0;
+    label.x = 5;
+    label.y = this.bg.height - 20;
+    this.bg.addChild(label);
+
+    // cost
+    this.cost = new CardCost(this.cardDef, this);
 
     this.createTypeLabel(this.cardDef.type);
     if (this.cardDef.type == "Attack") {
@@ -81,19 +80,31 @@ class CardVisual {
     label.color = cc.color(220,220,0,255);
     label.anchorX = 0;
     label.anchorY = 0;
-    label.x = 5;
-    label.y = 5;
+    label.x = 7;
+    label.y = 7;
     this.bg.addChild(label);
+
+    // check KO
+    if (this.cardDef.special == "KO") {
+      var padding = 3;
+      var back = cc.LayerColor.create(cc.color(100,100,100,255), label.width + padding*2, label.height + padding*2);
+      back.anchorX = 0.5;
+      back.anchorY = 0.5;
+      back.x = -padding;
+      back.y = -padding;
+      label.addChild(back, -1);
+    }
   }
 
   createAttackVisuals() {
     var label = cc.LabelTTF.create(this.cardDef.power, "Arial", 26);
     label.color = cc.color(220,0,0,255);
-    label.anchorX = 1;
-    label.anchorY = 0;
-    label.x = this.bg.width - 5;
-    label.y = 3;
+    label.anchorX = 0.5;
+    label.anchorY = 0.5;
+    label.x = this.bg.width - 3 - label.width * 0.5;
+    label.y = label.height * 0.5;
     this.bg.addChild(label);
+
     return label;
   }
 
@@ -132,7 +143,7 @@ function HighlightCard (visualIndex) {
 }
 
 function playCard(index) {
-
+  this.bg.runAction(new cc.Sequence([new cc.moveBy(0.3, cc.point(0, 200)), new cc.ScaleTo(0.3, 0.5)]))
 }
 
 
@@ -145,7 +156,7 @@ class CardCost {
   }
 
   createVisual() {
-    var x = /*this.visual.bg.width - */10;
+    var x = 7;
     var y = this.visual.bg.height - 40;
     for (var i = 0; i < this.cardDef.cost; i++) {
       var dot = cc.LayerColor.create(cc.color(0,0,200,255), 5, 5);
