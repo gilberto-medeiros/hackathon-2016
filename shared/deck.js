@@ -1,9 +1,13 @@
 class Deck {
-  constructor(deckDefinition) {
-    this.definition = deckDefinition;
-    this.hand = []
-  }
 
+  constructor(deckDefinition) {
+    //console.log('Creating Deck');
+    this.definition = deckDefinition;
+    this.hand = new Array();
+    this.addCardToHand();
+
+
+  }
 
   playCard(cardIndex) {
     var card = this.deck.hand[cardIndex];
@@ -13,8 +17,12 @@ class Deck {
   }
 
   addCardToHand() {
-    while (this.deck.hand.lenght < 5) {
-      this.deck.hand.push(this.definition.getRandomCardDefinition().id);
+    console.log('Adding cards to hand.');
+    console.log(this.hand);
+    while (this.hand.length == undefined || this.hand.lenght < 5) {
+      var cardID = this.definition.getRandomCardDefinition().id;
+      console.log('Added ' + cardID);
+      this.hand.push(cardID);
     }
   }
 

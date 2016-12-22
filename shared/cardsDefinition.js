@@ -12,9 +12,9 @@ class CardsDefinition {
     return this.allCards.cards[index];
   }
 
-  getRandomCardDefinition(id) {
-    for (var o in this.allCards.cards) {
-      if(o.id == id) return o
+  getCardDefinition(id) {
+    for (var cardIndex in this.allCards.cards) {
+      if(this.allCards.cards[cardIndex].id == id) return this.allCards.cards[cardIndex]
     }
   }
 
