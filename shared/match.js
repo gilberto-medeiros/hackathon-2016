@@ -4,8 +4,8 @@
 class Match {
     constructor(id) {
         this.id = id;
-        this.players = new Array();
-        this.activeCards = new Array();
+        this.players = [];
+        this.activeCards = [];
     }
 
     addPlayer(player) {
@@ -19,7 +19,7 @@ class Match {
         });
         player.socket.on('play card', function(msg) {
             console.log('message '+ msg.handIndex);
-        }
+        });
         this.players.push(player);
         return true;
     }
@@ -44,26 +44,27 @@ class Match {
         return this.players.length == 2;
     }
 
-    tick() {
-        for (var playerIndex in this.players) {
-            var player = this.players[playerIndex];
-            player.tick();
-
-            // send stamina update
-            player.socket.emit('event', {'setStamina': player.stamina});
-        }
-    }
-
     start(){
-        waitInterval = setInterval(wait, 3000, 1000);
+        var waitInterval;
+        var ref = this;
+        waitInterval = setInterval(function(){
+            clearInterval(waitInterval);
+            setInterval(function(){
+                console.log(ref.players);
+                for (var playerIndex in ref.players) {
+                    var player = ref.players[playerIndex];
+                    player.tick();
+                    // send stamina update
+                    player.socket.emit('event', {'setStamina': player.stamina});
+                }
+            }, 1000, 1000);
+            for (var playerIndex in ref.players) {
+                var player = ref.players[playerIndex];
+                player.socket.emit('event', {'setHand': player.deck.hand});
+            }
+        }, 3000, 1000);
         console.log('match is starting');
-        io.emit('event', {txt : 'match ' + match.id + ' is starting'});
-    }
-
-    function wait() {
-        clearInterval(waitInterval);
-        setInterval(tick, 1000, 1000);
-        match.sendHandsToPlayers();
+        //io.emit('event', {txt : 'match ' + match.id + ' is starting'});
     }
 }
 
