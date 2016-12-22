@@ -1,8 +1,26 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var fs = require("fs");
+var path = require("path");
+
+var Player = require('../shared/player');
 
 var public_host = 'http://localhost/public/cocos2d-js-v3.12/'
+
+var content = fs.readFileSync("shared/cards.json");
+var json = JSON.parse(content);
+console.log("asodqswe " + json.cards[0].id);
+
+/*
+//var $ = require('jQuery');
+//var jsdom = require('jsdom').jsdom;
+var cardDefs;
+$.getJSON('cards.json', function(response){
+      cardDefs = response;
+      console.log(cardDefs.cards[0].id);
+});*/
+
 
 /*app.get('/', function(req, res){
   res.redirect(public_host + 'HelloWorld.html');
@@ -14,12 +32,7 @@ app.get('/*js$/', function(req, res){
   res.send(path);
 })*/
 
-class Polygon {
-  constructor(height, width) {
-    this.height = height;
-    this.width = width;
-  }
-}
+
 
 var playerid = 0;
 http.listen(3000, function(){
@@ -27,19 +40,25 @@ http.listen(3000, function(){
 
 });
 
+// accept a connection
 io.on('connection', function(socket){
   console.log('a user connected. id=' + playerid++);
-  //socket.broadcast.emit('event', {txt : 'a user connected'});
-  socket.broadcast.emit('event', 'a user connected');
+  socket.broadcast.emit('event', {txt : 'a user connected'});
+  //socket.broadcast.emit('event', 'a user connected');
 
-  var p = new Polygon(100, 200);
+  //var p = new Polygon(100, 200);
+  //console.log('awesonme ' + p.height);
+  var p = new Player(null, 0,0,0,0);
+  p.print();
 
-  console.log('awesonme ' + p.height);
-
+  // process a disconnected
   socket.on('disconnect', function() {
     console.log('user disconnected');
-    socket.broadcast.emit('event', 'a user disconnected');
+    //socket.broadcast.emit('event', 'a user disconnected');
+    socket.broadcast.emit('event', {txt : 'DISCONNECT'});
   });
+
+  // recieve chat messages from a client
   socket.on('chat message', function(msg) {
     console.log('message '+ msg);
     io.emit('chat message', msg);

@@ -1,4 +1,4 @@
-[
+{"cards":[
   {"id":"liver-kick",         "type":"Attack",  "name":"Liver Kick",         "target":"Body", "power":5, "special":"KO", "cost":0},
   {"id":"liver-shot",         "type":"Attack",  "name":"Liver Shot",         "target":"Body", "power":4, "special":"KO", "cost":0},
   {"id":"body-uppercut",      "type":"Attack",  "name":"Body Uppercut",      "target":"Body", "power":3, "special":"",   "cost":0},
@@ -17,3 +17,4 @@
   {"id":"jab",                "type":"Counter", "name":"Jab",                "target":"Head", "power":1, "Special":"",   "cost":0},
   {"id":"straight",           "type":"Counter", "name":"Straight",           "target":"Head", "power":2, "Special":"",   "cost":0}
 ]
+}
