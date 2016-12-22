@@ -1,0 +1,29 @@
+{
+  "name": "mma-stars",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://mariosalgado@github.com/gilberto-medeiros/hackathon-2016.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gilberto-medeiros/hackathon-2016/issues"
+  },
+  "homepage": "https://github.com/gilberto-medeiros/hackathon-2016#readme",
+  "dependencies": {
+    "express": "^4.10.2",
+    "grunt-concurrent": "^2.3.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-nodemon": "^0.4.2",
+    "jquery": "^3.1.1",
+    "open": "0.0.5",
+    "socket.io": "^1.7.2",
+    "socketio": "^1.0.0"
+  }
+}
