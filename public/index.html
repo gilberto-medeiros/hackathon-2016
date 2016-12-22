@@ -21,7 +21,7 @@
                       MyScene = cc.Scene.extend({
                           onEnter:function () {
                               this._super();
-                              /*var size = cc.director.getWinSize();
+                              /*
                               var sprite = cc.Sprite.create("HelloWorld.png");
                               sprite.setPosition(size.width / 2, size.height / 2);
                               sprite.setScale(0.8);
@@ -32,6 +32,12 @@
                               this.addChild(label, 1);
                               */
 
+                              var size = cc.director.getWinSize();
+                              var background = cc.LayerColor.create(cc.color(191,191,191,255), size.width, size.height);
+                              background.x = 0;
+                              background.y = 0;
+                              this.addChild(background, -1);
+
                               staminaBar = cc.LayerColor.create(cc.color(0,0,255,255), staminaBarUnitScreenWidth, 30);
                               staminaBar.x = 70;
                               staminaBar.y = 5;
@@ -39,8 +45,8 @@
                               var staminaBarBG = cc.LayerColor.create(cc.color(0,0,0,255), staminaBarUnitScreenWidth*10 + 10, staminaBar.height + 10);
                               staminaBarBG.x = staminaBar.x - 5;
                               staminaBarBG.y = staminaBar.y - 5
-                              this.addChild(staminaBarBG);
-                              this.addChild(staminaBar);
+                              this.addChild(staminaBarBG, 1);
+                              this.addChild(staminaBar, 2);
                           }
                       });
                       gameScene = new MyScene();
