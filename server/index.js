@@ -42,7 +42,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('play card', function(msg) {
-      console.log('message '+ msg);
+      console.log('message '+ msg.handIndex);
 
     });
 
