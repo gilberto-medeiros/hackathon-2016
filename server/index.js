@@ -42,8 +42,8 @@ io.on('connection', function(socket){
     });
 
     socket.on('play card', function(msg) {
-      console.log('message '+ msg.handIndex);
-
+      //console.log('playerid: ' + msg.playerid + ' - cardidx: ' + msg.handIndex);
+      match.addActiveCard(msg.playerid, msg.handIndex)
     });
 
     if (match.isMatchFull()) {
