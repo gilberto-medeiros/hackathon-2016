@@ -18,7 +18,7 @@ module.exports = function(grunt) {
                         nodemon.on('config:update', function() {
                             console.log('config updated, starting browser');
                             //require('open')('http://localhost:3000');
-                            require('open')('http://localhost/Projects/MMAStars/public/');
+                            require('open')('http://localhost/mma-stars/public/');
                             //require('open')('http://localhost:8080/?port=5858');
                         }, 2000);
                         nodemon.on('restart', function() {

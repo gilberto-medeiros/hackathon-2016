@@ -1,18 +1,16 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-var fs = require("fs");
 var path = require("path");
 
 var Player = require('../shared/player');
+var CardsDefinition = require('../shared/cardsDefinition');
+var DeckDefinition = require('../shared/deckDefinition');
 
-var public_host = 'http://localhost/public/cocos2d-js-v3.12/'
+var public_host = 'http://localhost/public/cocos2d-js-v3.12/';
+var cardsDefinition = new CardsDefinition();
+var deckDefinition =  new DeckDefinition('all-cards', cardsDefinition);
 
-var content = fs.readFileSync("shared/cards.json");
-var json = JSON.parse(content);
-
-
-console.log("asodqswe " + json.cards[0].id);
 
 /*
 //var $ = require('jQuery');
@@ -63,7 +61,7 @@ var playerid = 0;
 var match = new Match;
 // accept a connection
 io.on('connection', function(socket){
-  var p = new Player(null, 0,0,0,0, playerid++);
+  var p = new Player(deckDefinition.createDeck(), 0,0,0,0, playerid++);
   if (match.addPlayer(p)) {
     //console.log('a user connected. id=' + playerid++);
     socket.emit('event', {txt : 'you connected with id ' + p.id, 'setId': p.id});
