@@ -28,7 +28,7 @@ class Player {
   }
 
   tick() {
-    this.addStamina(1);
+    this.addStamina(3+this.headLane.getBonus());
   }
 }
 
