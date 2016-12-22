@@ -20,7 +20,7 @@ socket.on('chat message', function(msg){
 // get generic state events from server
 socket.on('event', function(msg){
     console.log(msg);
-    var p = new Polygon(100, 200);
+    //var p = new Polygon(100, 200);
 
     console.log(msg);
     $('#messages').append($('<li><b>').text("w"+msg.txt));
