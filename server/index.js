@@ -3,6 +3,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require("path");
 
+var Match = require('../shared/match');
 var Player = require('../shared/player');
 var CardsDefinition = require('../shared/cardsDefinition');
 var DeckDefinition = require('../shared/deckDefinition');
@@ -11,78 +12,10 @@ var public_host = 'http://localhost/public/cocos2d-js-v3.12/';
 var cardsDefinition = new CardsDefinition();
 var deckDefinition =  new DeckDefinition('all-cards', cardsDefinition);
 
-
-/*
-//var $ = require('jQuery');
-//var jsdom = require('jsdom').jsdom;
-var cardDefs;
-$.getJSON('cards.json', function(response){
-      cardDefs = response;
-      console.log(cardDefs.cards[0].id);
-});*/
-
-
-/*app.get('/', function(req, res){
-  res.redirect(public_host + 'HelloWorld.html');
-});
-
-app.get('/*js$/', function(req, res){
-  var path = public_host + req.params[0] + 'js';
-  console.log('path is ' + path);
-  res.send(path);
-})*/
-
 http.listen(3000, function(){
   console.log('listening on *:3000');
 
 });
-
-class Match {
-  constructor() {
-    this.players = new Array();
-    this.activeCards = new Array();
-  }
-
-  addPlayer(player) {
-    if(player.length == 2) {
-      console.log("###### IGNORING PLAYER");
-      return false;
-    }
-    console.log('a player connected. id=' + player.id);
-    this.players.push(player);
-    return true;
-  }
-
-  addActiveCard(cardID) {
-    this.activeCards[palyer.id] = cardID;
-  }
-
-  sendHandsToPlayers() {
-    for (var playerIndex in this.players) {
-      var player = this.players[playerIndex];
-      player.socket.emit('event', {'setHand': player.deck.hand});
-
-    }
-  }
-
-  resolution() {
-
-  }
-
-  isMatchFull() {
-    return this.players.length == 2;
-  }
-
-  tick() {
-    for (var playerIndex in this.players) {
-      var player = this.players[playerIndex];
-      player.tick();
-
-      // send stamina update
-      player.socket.emit('event', {'setStamina': player.stamina});
-    }
-  }
-}
 
 var playerid = 0;
 var match = new Match;
