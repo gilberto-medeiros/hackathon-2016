@@ -56,6 +56,13 @@ class Match {
     return this.players.length == 2;
   }
 
+  sendHandsToPlayers() {
+    for (var playerIndex in this.players) {
+      var p = this.players[playerIndex];
+      p.socket.emit('event', {'setHand':p.deck.hand});
+    }
+  }
+
   tick() {
     for (var playerIndex in this.players) {
       var player = this.players[playerIndex];
@@ -92,7 +99,7 @@ io.on('connection', function(socket){
     });
 
     if (match.isMatchFull()) {
-      setInterval(tick, 1000, 1000);
+      waitInterval = setInterval(wait, 2000);
       console.log('match is starting');
       io.emit('event', {txt : 'match is starting'});
     }
@@ -101,6 +108,13 @@ io.on('connection', function(socket){
 
   }
 });
+
+function wait(){
+  console.log('go');
+  setInterval(tick, 1000, 1000);
+  match.sendHandsToPlayers();
+  clearInterval(waitInterval);
+}
 
 function tick(delta) {
   match.tick();

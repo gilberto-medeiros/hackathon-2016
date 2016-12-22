@@ -17,7 +17,7 @@ class Deck {
       var cardID = this.definition.cardsDefinition.getRandomCardDefinition().id;
       this.hand.push(cardID);
     }
-    console.log(this.hand)
+    //console.log(this.hand)
   }
 
 }
