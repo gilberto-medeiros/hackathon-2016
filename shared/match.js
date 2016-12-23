@@ -6,6 +6,8 @@ class Match {
         this.id = id;
         this.players = [];
         this.activeCards = [];
+        this.resolution = require('../shared/resolution');
+
     }
 
     addPlayer(player) {
@@ -39,10 +41,6 @@ class Match {
         }
     }
 
-    resolution() {
-
-    }
-
     isMatchFull() {
         return this.players.length == 2;
     }
@@ -54,6 +52,8 @@ class Match {
             clearInterval(waitInterval);
             setInterval(function(){
                 //console.log(ref.players);
+                console.log(ref.resolution);
+                ref.resolution(ref);
                 for (var playerIndex in ref.players) {
                     var player = ref.players[playerIndex];
                     player.tick();
