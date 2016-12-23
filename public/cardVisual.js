@@ -8,10 +8,17 @@ class CardVisual {
   }
 
   createVisual() {
-    this.bg = cc.LayerColor.create(cc.color(0,200,0,255), 120, 200);
-    this.bg.anchorX = 0.5;
+    if (this.cardDef.art =="") {
+      this.bg = cc.LayerColor.create(cc.color(0,200,0,255), 120, 200);
+      this.bgHasArt = false;
+    }
+    else {
+      this.bg = new cc.Sprite(this.cardDef.art);
+      this.bg.ignoreAnchor = true;
+      this.bgHasArt = true;
+    }
     this.bg.anchorY = 0;
-    gameScene.addChild(this.bg);
+    gameScene.addChild(this.bg, 3);
 
     // create the menu
     var menu = cc.Menu.create();
@@ -52,15 +59,19 @@ class CardVisual {
   createCardSpecifics() {
     // create the card name
     var label = cc.LabelTTF.create(this.cardDef.name, "Arial", 16);
-    label.anchorX = 0;
-    label.x = 5;
-    label.y = this.bg.height - 20;
+    label.color = cc.color(0,0,0,255);
+    //label.anchorX = 0.5;
+    label.x = this.bg.width*0.5;
+    label.y = 50;
+    label.rotation = -10;
     this.bg.addChild(label);
 
     // cost
     this.cost = new CardCost(this.cardDef, this);
 
-    this.createTypeLabel(this.cardDef.type);
+    if (!this.bgHasArt) {
+      this.createTypeLabel(this.cardDef.type);
+    }
     if (this.cardDef.type == "Attack") {
       this.createAttackVisuals();
     }
@@ -73,6 +84,17 @@ class CardVisual {
     } else {
       console.log("########### unrecognised card type" + this.cardDef.type);
     }
+
+    // check KO
+    if (this.cardDef.special == "KO") {
+      var label = cc.LabelTTF.create("KO", "Arial", 12);
+      label.color = cc.color(255,0,255,255);
+      label.anchorX = 0.5;
+      label.anchorY = 0.5;
+      label.x = this.bg.width*0.5;
+      label.y = this.bg.height - 12 - label.height * 0.5;
+      this.bg.addChild(label);
+    }
   }
 
   createTypeLabel(type) {
@@ -83,26 +105,15 @@ class CardVisual {
     label.x = 7;
     label.y = 7;
     this.bg.addChild(label);
-
-    // check KO
-    if (this.cardDef.special == "KO") {
-      var padding = 3;
-      var back = cc.LayerColor.create(cc.color(100,100,100,255), label.width + padding*2, label.height + padding*2);
-      back.anchorX = 0.5;
-      back.anchorY = 0.5;
-      back.x = -padding;
-      back.y = -padding;
-      label.addChild(back, -1);
-    }
   }
 
   createAttackVisuals() {
-    var label = cc.LabelTTF.create(this.cardDef.power, "Arial", 26);
-    label.color = cc.color(220,0,0,255);
+    var label = cc.LabelTTF.create(this.cardDef.power, "Arial", 22);
+    label.color = cc.color(255,0,0,255);
     label.anchorX = 0.5;
     label.anchorY = 0.5;
-    label.x = this.bg.width - 3 - label.width * 0.5;
-    label.y = label.height * 0.5;
+    label.x = this.bg.width - 15 - label.width * 0.5;
+    label.y = this.bg.height - 7 - label.height * 0.5;
     this.bg.addChild(label);
 
     return label;
@@ -125,7 +136,7 @@ function CreateHand(hand) {
     var vis = new CardVisual(getCardDefById(hand[handIndex]), handIndex);
     var root = vis.createVisual();
     root.x = 80 + offset;
-    root.y = 50;
+    root.y = 5;
     offset += 150;
     handVisuals.push(vis);
   }
@@ -151,11 +162,25 @@ class CardCost {
   constructor(cardDef, visual) {
     this.cardDef = cardDef;
     this.visual = visual;
-
-    this.createVisual();
+    if (this.visual.bgHasArt) {
+      this.createLabelVisual();
+    }
+    else {
+      this.createDotVisual();
+    }
   }
 
-  createVisual() {
+  createLabelVisual() {
+    var label = cc.LabelTTF.create(this.cardDef.cost, "Arial", 22);
+    label.color = cc.color(255,255,255,255);
+    label.anchorX = 0.5;
+    label.anchorY = 0.5;
+    label.x = 15+ label.width * 0.5;
+    label.y = this.visual.bg.height - label.height*0.5 - 7;
+    this.visual.bg.addChild(label);
+  }
+
+  createDotVisual() {
     var x = 7;
     var y = this.visual.bg.height - 40;
     for (var i = 0; i < this.cardDef.cost; i++) {

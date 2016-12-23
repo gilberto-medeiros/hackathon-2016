@@ -19,33 +19,43 @@ $('#next-turn').submit(function(){
 
 // get chat messages from server
 socket.on('chat message', function(msg){
-    console.log('text');
     $('#messages').append($('<li>').text("x:"+msg));
 });
 
+function processSingleEvent(msg) {
+  if ('txt' in msg) {
+    console.log(msg);
+    $('#messages').append($('<li>').text(msg.txt));
+  }
+
+  if ('setId' in msg) {
+    $('#messages').append($('<li>').text('my id is ' + msg.setId));
+    playerid = msg.setId;
+  }
+
+  if ('setStamina' in msg) {
+    staminaBar.width = staminaBarUnitScreenWidth*msg.setStamina;
+  }
+
+  if ('setHand' in msg) {
+    $('#messages').append($('<li>').text('hand ' + msg.setHand));
+    CreateHand(msg.setHand);
+    localPlayer = new PlayerVisual(true, 1, 10, 10, 10);
+    remotePlayer = new PlayerVisual(false, 1, 10, 10, 10);
+  }
+}
+
 // get generic state events from server
 socket.on('event', function(msg){
-    if ('txt' in msg) {
-      console.log(msg);
-      $('#messages').append($('<li>').text(msg.txt));
+  if( msg.constructor === Array ) {
+    for (var i = 0; i < msg.length; i++) {
+      processSingleEvent(msg[i]);
     }
+  }
+  else {
+    processSingleEvent(msg);
+  }
 
-    if ('setId' in msg) {
-      $('#messages').append($('<li>').text('my id is ' + msg.setId));
-      playerid = msg.setId;
-    }
-
-    if ('setStamina' in msg) {
-      //$('#messages').append($('<li>').text('stamina ' + msg.setStamina));
-      staminaBar.width = staminaBarUnitScreenWidth*msg.setStamina;
-    }
-
-    if ('setHand' in msg) {
-      $('#messages').append($('<li>').text('hand ' + msg.setHand));
-      CreateHand(msg.setHand);
-      localPlayer = new PlayerVisual(true, 1, 10, 10, 10);
-      remotePlayer = new PlayerVisual(false, 1, 10, 10, 10);
-    }
 });
 
 var cardDefs;
@@ -78,7 +88,7 @@ $.getJSON('../shared/cards.json', function(response){
                     "art/Interface__0000s_0000_Number.png",
                     "art/Interface__0000s_0001_Down-Interface.png",];
     resources = addResourcesFromCards(resources);
-    
+
     //load resources
     cc.LoaderScene.preload(resources, function () {
         MyScene = cc.Scene.extend({
@@ -92,7 +102,7 @@ $.getJSON('../shared/cards.json', function(response){
 
                 staminaBar = cc.LayerColor.create(cc.color(0,0,255,255), staminaBarUnitScreenWidth, 30);
                 staminaBar.x = 70;
-                staminaBar.y = 5;
+                staminaBar.y = 225;
 
                 var staminaBarBG = cc.LayerColor.create(cc.color(0,0,0,255), staminaBarUnitScreenWidth*10 + 10, staminaBar.height + 10);
                 staminaBarBG.x = staminaBar.x - 5;
