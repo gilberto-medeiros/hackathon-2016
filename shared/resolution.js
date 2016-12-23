@@ -5,15 +5,13 @@ var resolution = function(match) {
     var currPlayer = match.players[i];
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
-      console.log(currCard);
-      //console.log(currPlayer + ' ' + currCard.id);
-    } else {
-      //console.log(i + ' no card chosen.')
+      if (currCard.constructor === Block) {
+        console.log('it is a block')
+      }
+      // Process blocks
+      
     }
   }
-
-
-
 }
 
 module.exports = resolution
