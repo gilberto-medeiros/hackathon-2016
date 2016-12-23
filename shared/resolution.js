@@ -65,7 +65,7 @@ var resolution = function(match) {
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
       if(currCard.cost <= currPlayer.stamina) {
-        updateCardMessage(oppoPlayer);
+        currPlayer.updateCardMessage(oppoPlayer);
       }
     }
     currPlayer.reset();
