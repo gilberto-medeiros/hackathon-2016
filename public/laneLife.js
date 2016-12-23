@@ -6,6 +6,8 @@ class LaneLife {
     this.setBodyHealth(bodyHealth);
     this.setLegHealth(legHealth);
 
+
+
     this.node = this.createVisual();
   }
 
@@ -45,6 +47,11 @@ class LaneLife {
     label.anchorY = 0.5;
     label.addChild(sprite, -1);
     parent.addChild(label);
+
+    var blockLabel = cc.LabelTTF.create("0", "Arial", 26);
+    label.addChild(blockLabel);
+    label.blockLabel = blockLabel;
+
     return label;
   }
 
@@ -53,7 +60,7 @@ class LaneLife {
     gameScene.addChild(node, -5);
     this.headLabel = this.createHealthNode(this.headHealth, node);
     this.setHeadHealth(this.headHealth);
-    this.headLabel.x = 150;
+    this.headLabel.x = 120;
     this.headLabel.y = 200;
 
     this.bodyLabel = this.createHealthNode(this.bodyHealth, node);
@@ -70,11 +77,31 @@ class LaneLife {
     var body = this.bodyLabel;
     var leg = this.legLabel;
     node.reduce = function() {
-      node.scale = 0.4;
-      head.scale = 1.5;
-      body.scale = 1.5;
-      leg.scale = 1.5;
+      node.scale = -0.4;
+      head.scale = -1.5;
+      body.scale = -1.5;
+      leg.scale = -1.5;
     }
     return node;
+  }
+
+  addBlockDamage(lane, diff) {
+    if (lane == "Head") {
+      this.headLabel.blockLabel.text = Integer.parseInt(this.headLabel.blockLabel.text) - diff;
+    } else if (lane == "Body") {
+      this.bodyLabel.blockLabel.text = Integer.parseInt(this.bodyLabel.blockLabel.text) - diff;
+    } else if (lane == "Legs") {
+      this.legLabel.blockLabel.text = Integer.parseInt(this.legLabel.blockLabel.text) - diff;
+    }
+  }
+
+  addHealthDamage(lane, diff) {
+    if (lane == "Head") {
+      this.setHeadHealth(this.headHealth + diff);
+    } else if (lane == "Body") {
+      this.setBodyHealth(this.bodyHealth + diff);
+    } else if (lane == "Legs") {
+      this.setLegHealth(this.legHealth + diff);
+    }
   }
 }

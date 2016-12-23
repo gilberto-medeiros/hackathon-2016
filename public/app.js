@@ -63,17 +63,21 @@ function processSingleEvent(msg) {
   }
 
     if ('blockDamage' in msg) {
-        //$('#messages').append($('<li>').text('hand ' + msg.setHand));
-        //msg.damage
-        //msg.lane
-        //TODO Handle block damage
+        if (msg.blockDamage.localPlayer) {
+          localPlayer.laneLife.addBlockDamage(msg.blockDamage.lane, msg.blockDamage.value);
+        }
+        else {
+          remotePlayer.laneLife.addBlockDamage(msg.blockDamage.lane, msg.blockDamage.value);
+        }
     }
 
     if ('healthDamage' in msg) {
-        //$('#messages').append($('<li>').text('hand ' + msg.setHand));
-        //msg.damage
-        //msg.lane
-        //TODO Handle block damage
+      if (msg.healthDamage.localPlayer) {
+        localPlayer.laneLife.addHealthDamage(msg.healthDamage.lane, msg.healthDamage.value);
+      }
+      else {
+        remotePlayer.laneLife.addHealthDamage(msg.healthDamage.lane, msg.healthDamage.value);
+      }
     }
 
     if ('stackBlock' in msg) {

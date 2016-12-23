@@ -44,13 +44,10 @@ class Player {
     }
 
     sendMessageList() {
+        console.log("player " + this.id + " will get messages ");
         console.log(this.messageList);
         this.socket.emit('event', this.messageList);
         this.messageList = [];
-      /*for (var i = 0; i < this.messageList.length; i++) {
-       var message = this.messageList[i];
-       this.socket.emit()
-       }*/
     }
 
     receiveDamage(damage, lane, oppoPlayer){
