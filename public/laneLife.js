@@ -82,6 +82,9 @@ class LaneLife {
     node.reduce = function() {
       node.scale = -0.4;
       head.scale = -1.5;
+      var y = head.y;
+      head.y = leg.y;
+      leg.y = y;
       body.scale = -1.5;
       leg.scale = -1.5;
     }

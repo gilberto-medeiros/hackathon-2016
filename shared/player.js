@@ -40,6 +40,7 @@ class Player {
     }
 
     sendMessageList() {
+      console.log(this.deck.hand);
         if (this.stamina > 10) {
             this.stamina = 10;
         }
@@ -66,7 +67,7 @@ class Player {
     }
 
     stackBlock(block, lane, oppoPlayer){
-      console.log("damage block " + block);
+      //console.log("damage block " + block);
         switch(lane) {
             case 'Head':
                 this.headLane.stackBlock(block, this, lane, oppoPlayer);
@@ -96,7 +97,7 @@ class Player {
     updateCardMessage(oppoPlayer) {
         oppoPlayer.pushMessageToClient({'opponentPlayCard': this.getCardInHand(this.currHandIndex).id});
         this.pushMessageToClient({'playCard': this.currHandIndex});
-        this.deck.playCard();
+        this.deck.playCard(this.currHandIndex);
         this.pushMessageToClient({'addCard': this.deck.getCardInHand(4).id});
     }
 }

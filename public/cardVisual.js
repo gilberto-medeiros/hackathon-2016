@@ -167,6 +167,14 @@ function PlayCard(cardIndex) {
 
 function OpponentPlayCard(cardId) {
   var cardDef = getCardDefById(cardId);
+
+  var vis = new CardVisual(getCardDefById(cardId), -1);
+  var root = vis.createVisual();
+  root.x = 900;
+  root.y = 300;
+  root.runAction(new cc.Sequence([new cc.DelayTime(0.8),
+                                    new cc.ScaleTo(0.2, 0),
+                                  new cc.RemoveSelf(true)]));
 }
 
 function SpawnCard(cardId, index) {
