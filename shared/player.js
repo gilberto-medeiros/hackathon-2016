@@ -25,9 +25,6 @@ class Player {
 
     addStamina(stamina) {
         this.stamina += stamina;
-        if (this.stamina > 10) {
-            this.stamina = 10;
-        }
     }
 
     getCardInHand() {
@@ -36,7 +33,6 @@ class Player {
 
     tick() {
         this.addStamina(3+this.headLane.getBonus());
-        this.pushMessageToClient({'setStamina': this.stamina});
     }
 
     pushMessageToClient(newMessage) {
@@ -44,6 +40,10 @@ class Player {
     }
 
     sendMessageList() {
+        if (this.stamina > 10) {
+            this.stamina = 10;
+        }
+        this.pushMessageToClient({'setStamina': this.stamina});
         console.log("player " + this.id + " will get messages ");
         console.log(this.messageList);
         this.socket.emit('event', this.messageList);

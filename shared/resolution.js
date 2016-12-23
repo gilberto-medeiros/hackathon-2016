@@ -16,10 +16,14 @@ var resolution = function(match) {
 
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
-      if(currCard.cost > currPlayer.stamina) continue;
+      /*
+      if(currCard.cost > currPlayer.stamina) {
+        console.log('Ignoring card with cost ' + currCard.cost + ' for ' + currPlayer.stamina + ' stamina ' );
+        continue;
+      }
+      */
 
       // Process stamina
-      //console.log(currCard.cost);
       staminaCost = currCard.cost;
       currPlayer.addStamina(-staminaCost);
 
@@ -35,7 +39,6 @@ var resolution = function(match) {
       if (currCard.constructor === Attack) {
         currPlayer.setUnblockable();
       }
-
     }
   }
 
@@ -47,7 +50,7 @@ var resolution = function(match) {
 
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
-      if(currCard.cost > currPlayer.stamina) continue;
+      //if(currCard.cost > currPlayer.stamina) continue;
 
       if (currCard.constructor === Attack) {
         oppoPlayer.receiveDamage(currCard.power, currCard.target, currPlayer);
@@ -64,9 +67,9 @@ var resolution = function(match) {
     var oppoPlayer = getOpponent(i);
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
-      if(currCard.cost <= currPlayer.stamina) {
+      //if(currCard.cost <= currPlayer.stamina) {
         currPlayer.updateCardMessage(oppoPlayer);
-      }
+      //}
     }
     currPlayer.reset();
   }

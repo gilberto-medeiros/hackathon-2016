@@ -82,13 +82,13 @@ class Match {
     }
 
     nextTurn(){
-        this.resolution(this);
         for (var playerIndex in this.players) {
             var player = this.players[playerIndex];
             player.tick();
             // send stamina update
             //player.socket.emit('event', {'setStamina': player.stamina});
         }
+        this.resolution(this);
         for (var playerIndex in this.players) {
             var player = this.players[playerIndex];
             player.sendMessageList();

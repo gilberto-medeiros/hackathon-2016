@@ -31,7 +31,7 @@ class Lane {
 
   stackBlock(block, player, lane, oppoPlayer) {
     player.pushMessageToClient({'stackBlock': {'lane': lane , 'value': block, 'localPlayer': true}});
-    oppoPlayer.pushMessageToClient({'blockDamage': {'lane': lane , 'value': block, 'localPlayer': false}});
+    oppoPlayer.pushMessageToClient({'stackBlock': {'lane': lane , 'value': block, 'localPlayer': false}});
     this.block += block;
   }
 
