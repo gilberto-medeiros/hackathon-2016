@@ -61,6 +61,20 @@ function processSingleEvent(msg) {
     //$('#messages').append($('<li>').text('hand ' + msg.setHand));
     SpawnCard(msg.addCard, 4);
   }
+
+    if ('blockDamage' in msg) {
+        //$('#messages').append($('<li>').text('hand ' + msg.setHand));
+        //message.damage
+        //message.lane
+        //TODO Handle block damage
+    }
+
+    if ('healthDamage' in msg) {
+        //$('#messages').append($('<li>').text('hand ' + msg.setHand));
+        //message.damage
+        //message.lane
+        //TODO Handle block damage
+    }
 }
 
 // get generic state events from server

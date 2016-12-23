@@ -11,15 +11,17 @@ class Lane {
     if(this.isBlockable){
       if(this.block - damage >= 0){
         this.block -= damage;
-        player.pushMessageToClient(lane + ' lane received ' + damage + ' block damage');
+        player.pushMessageToClient({'blockDamage': {'lane': lane , 'value': damage}});
       }else{
         var dif = Math.abs(this.block - damage);
+          player.pushMessageToClient({'blockDamage': {'lane': lane , 'value': block}});
         this.block = 0;
         this.health -= dif;
-        player.pushMessageToClient(lane + ' lane received ' + damage + ' health damage');
+          player.pushMessageToClient({'healthDamage': {'lane': lane , 'value': dif}});
       }
     }else{
       this.health -= damage;
+        player.pushMessageToClient({'healthDamage': {'lane': lane , 'value': damage}});
     }
   }
 
