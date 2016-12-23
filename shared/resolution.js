@@ -26,7 +26,7 @@ var resolution = function(match) {
 
       // Pre Process attack
       if (currCard.constructor === Attack) {
-        currPlayer.setBlockable(false);
+        currPlayer.setUnblockable();
       }
 
     }
