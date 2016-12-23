@@ -15,8 +15,10 @@ class Lane {
         oppoPlayer.pushMessageToClient({'blockDamage': {'lane': lane , 'value': damage, 'localPlayer': false}});
       }else{
         var dif = Math.abs(this.block - damage);
+        if (this.block > 0) {
           player.pushMessageToClient({'blockDamage': {'lane': lane , 'value': this.block, 'localPlayer': true}});
           oppoPlayer.pushMessageToClient({'blockDamage': {'lane': lane , 'value': this.block, 'localPlayer': false}});
+        }
         this.block = 0;
         this.health -= dif;
           player.pushMessageToClient({'healthDamage': {'lane': lane , 'value': dif, 'localPlayer': true}});
