@@ -17,51 +17,8 @@
     var gameScene;
     //var menu;
           window.onload = function(){
-              cc.game.onStart = function(){
-                  //load resources
-                  cc.LoaderScene.preload(["HelloWorld.png"], function () {
-                      MyScene = cc.Scene.extend({
-                          onEnter:function () {
-                              this._super();
-                              /*
-                              var sprite = cc.Sprite.create("HelloWorld.png");
-                              sprite.setPosition(size.width / 2, size.height / 2);
-                              sprite.setScale(0.8);
-                              this.addChild(sprite, 0);
+              //cc.game.onStart = function(){
 
-                              var label = cc.LabelTTF.create("Hello World", "Arial", 40);
-                              label.setPosition(size.width / 2, size.height / 2);
-                              this.addChild(label, 1);
-                              */
-
-                              var size = cc.director.getWinSize();
-                              var background = cc.LayerColor.create(cc.color(191,191,191,255), size.width, size.height);
-                              background.x = 0;
-                              background.y = 0;
-                              this.addChild(background, -1);
-
-                              staminaBar = cc.LayerColor.create(cc.color(0,0,255,255), staminaBarUnitScreenWidth, 30);
-                              staminaBar.x = 70;
-                              staminaBar.y = 5;
-
-                              var staminaBarBG = cc.LayerColor.create(cc.color(0,0,0,255), staminaBarUnitScreenWidth*10 + 10, staminaBar.height + 10);
-                              staminaBarBG.x = staminaBar.x - 5;
-                              staminaBarBG.y = staminaBar.y - 5
-
-                              this.addChild(staminaBarBG, 1);
-                              this.addChild(staminaBar, 2);
-                              /*
-                              menu = cc.Menu.create();
-                              menu.x -= size.width/2;
-                              menu.y -= size.height/2;
-                              this.addChild(menu);*/
-                          }
-                      });
-                      gameScene = new MyScene();
-                      cc.director.runScene(gameScene);
-                      ready();
-                  }, this);
-              };
               cc.game.run("gameCanvas");
           };
     </script>

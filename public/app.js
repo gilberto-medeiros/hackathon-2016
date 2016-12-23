@@ -59,7 +59,51 @@ function ready(){
     socket.emit('ready', {'playerid':playerid});
 }
 
+function addResourcesFromCards(resources) {
+  //var res = [];
+  for (var cardIndex in cardDefs.cards) {
+    var def = cardDefs.cards[cardIndex];
+    if (def.art != "") {
+      resources.push(def.art);
+    }
+  }
+  return resources;
+}
+
 $.getJSON('../shared/cards.json', function(response){
     cardDefs = response;
-    console.log(cardDefs.cards[0].id);
+
+    var resources = ["art/Interface__0000s_0002_Fighters.png",
+                    "art/card__0009_Shadow.png",
+                    "art/Interface__0000s_0000_Number.png",
+                    "art/Interface__0000s_0001_Down-Interface.png",];
+    resources = addResourcesFromCards(resources);
+    console.log(resources);
+    //load resources
+    cc.LoaderScene.preload(resources, function () {
+        MyScene = cc.Scene.extend({
+            onEnter:function () {
+                this._super();
+
+                var size = cc.director.getWinSize();
+                var sprite = cc.Sprite.create("art/Interface__0000s_0002_Fighters.png");
+                sprite.setPosition(size.width / 2, size.height / 2);
+                this.addChild(sprite, -10);
+
+                staminaBar = cc.LayerColor.create(cc.color(0,0,255,255), staminaBarUnitScreenWidth, 30);
+                staminaBar.x = 70;
+                staminaBar.y = 5;
+
+                var staminaBarBG = cc.LayerColor.create(cc.color(0,0,0,255), staminaBarUnitScreenWidth*10 + 10, staminaBar.height + 10);
+                staminaBarBG.x = staminaBar.x - 5;
+                staminaBarBG.y = staminaBar.y - 5
+
+                this.addChild(staminaBarBG, 1);
+                this.addChild(staminaBar, 2);
+            }
+        });
+        gameScene = new MyScene();
+        cc.director.runScene(gameScene);
+        ready();
+    }, this);
 });
