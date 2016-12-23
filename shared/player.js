@@ -56,13 +56,13 @@ class Player {
   receiveDamage(lane, damage){
       switch(lane) {
           case 'Head':
-              this.headLane.receiveDamage(damage);
+              this.headLane.receiveDamage(damage, this, lane);
               break;
           case 'Body':
-              this.bodyLane.receiveDamage(damage);
+              this.bodyLane.receiveDamage(damage, this, lane);
               break;
           case 'Legs':
-              this.legsLane.receiveDamage(damage);
+              this.legsLane.receiveDamage(damage, this, lane);
               break;
       }
   }

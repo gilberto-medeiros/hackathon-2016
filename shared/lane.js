@@ -7,14 +7,16 @@ class Lane {
     this.isBlockable = true;
   }
 
-  receiveDamage(damage, player) {
+  receiveDamage(damage, player, lane) {
     if(this.isBlockable){
       if(this.block - damage >= 0){
         this.block -= damage;
+        player.pushMessageToClient(lane + ' lane received ' + damage + ' block damage');
       }else{
         var dif = Math.abs(this.block - damage);
         this.block = 0;
         this.health -= dif;
+        player.pushMessageToClient(lane + ' lane received ' + damage + ' health damage');
       }
     }else{
       this.health -= damage;
