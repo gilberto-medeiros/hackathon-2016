@@ -47,6 +47,20 @@ function processSingleEvent(msg) {
     localPlayer = new PlayerVisual(true);
     remotePlayer = new PlayerVisual(false);
   }
+
+  if ('playCard' in msg) {
+    console.log('play card ' + msg.playCard);
+    PlayCard(msg.playCard);
+  }
+
+  if ('opponentPlayCard' in msg) {
+    OpponentPlayCard(msg.opponentPlayCard);
+  }
+
+  if ('addCard' in msg) {
+    //$('#messages').append($('<li>').text('hand ' + msg.setHand));
+    SpawnCard(msg.addCard, 4);
+  }
 }
 
 // get generic state events from server

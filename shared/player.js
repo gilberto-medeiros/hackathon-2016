@@ -79,10 +79,12 @@ class Player {
       this.pushMessageToClient({'playCard': this.currHandIndex,
                                 'addCard': this.deck.playCard()});
     }
-    
+
     this.headLane.setBlockable(true);
     this.bodyLane.setBlockable(true);
     this.legsLane.setBlockable(true);
+
+    this.currHandIndex = -1;
   }
 }
 
