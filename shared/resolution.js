@@ -51,12 +51,10 @@ var resolution = function(match) {
   }
 
   // Reset
-    /*
   for (i in match.players) {
     var currPlayer = match.players[i];
-    currPlayer.
-    match.players[i].reset()
-  }*/
+    currPlayer.reset()
+  }
 }
 
 module.exports = resolution
