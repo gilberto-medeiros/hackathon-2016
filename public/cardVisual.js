@@ -135,6 +135,8 @@ class CardVisual {
   }
 }
 
+var handXPos = [];
+
 function CreateHand(hand) {
   var offset = 0;
   for (var handIndex in hand) {
@@ -145,7 +147,34 @@ function CreateHand(hand) {
     root.y = 16;
     offset += 150;
     handVisuals.push(vis);
+    handXPos.push(root.x);
   }
+}
+
+function PlayCard(cardIndex) {
+  var card = handVisuals[cardIndex];
+  card.bg.runAction(new cc.Sequence([new cc.moveBy(0.3, cc.p(0, 200)),
+                                    //new cc.Spawn([new cc.ScaleTo(0.0, 0.5), cc.RotateBy(0.5, 1000, 1000)]),
+                                  new cc.RemoveSelf(true)]));
+  handVisuals.splice(cardIndex, 1);
+
+  for (var i = cardIndex; i < handVisuals.length; i++) {
+    var card = handVisuals[i];
+    card.bg.runAction(cc.moveBy(0.3, cc.p(-150, 0)));
+    card.handIndex -= 1;
+  }
+}
+
+function OpponentPlayCard(cardId) {
+  var cardDef = getCardDefById(cardId);
+}
+
+function SpawnCard(cardId, index) {
+  var vis = new CardVisual(getCardDefById(cardId), index);
+  var root = vis.createVisual();
+  root.x = handXPos[index];
+  root.y = 16;
+  handVisuals.push(vis);
 }
 
 function HighlightCard (visualIndex) {
@@ -160,7 +189,7 @@ function HighlightCard (visualIndex) {
 }
 
 function playCard(index) {
-  this.bg.runAction(new cc.Sequence([new cc.moveBy(0.3, cc.point(0, 200)), new cc.ScaleTo(0.3, 0.5)]))
+  this.bg.runAction(new cc.Sequence([new cc.moveBy(0.3, cc.p(0, 200)), new cc.ScaleTo(0.3, 0.5)]));
 }
 
 
