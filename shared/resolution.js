@@ -25,9 +25,10 @@ var resolution = function(match) {
 
       // Pre Process Blocks
       if (currCard.constructor === Block) {
-        if(currCard.target == 'Head') {currPlayer.headLane.stackBlock(currCard.damage)};
-        if(currCard.target == 'Body') {currPlayer.bodyLane.stackBlock(currCard.damage)};
-        if(currCard.target == 'Legs') {currPlayer.legsLane.stackBlock(currCard.damage)};
+        currPlayer.stackBlock(currCard.damage, currCard.target, oppoPlayer);
+        //if(currCard.target == 'Head') {currPlayer.headLane.stackBlock(currCard.damage)};
+        //if(currCard.target == 'Body') {currPlayer.bodyLane.stackBlock(currCard.damage)};
+        //if(currCard.target == 'Legs') {currPlayer.legsLane.stackBlock(currCard.damage)};
       }
 
       // Pre Process attack
@@ -49,7 +50,7 @@ var resolution = function(match) {
       if(currCard.cost > currPlayer.stamina) break;
 
       if (currCard.constructor === Attack) {
-        oppoPlayer.receiveDamage(currCard.damage, currCard.target);
+        oppoPlayer.receiveDamage(currCard.damage, currCard.target, oppoPlayer);
         //if(currCard.target == 'Head') {oppoPlayer.headLane.receiveDamage(currCard.damage)};
         //if(currCard.target == 'Body') {oppoPlayer.bodyLane.receiveDamage(currCard.damage)};
         //if(currCard.target == 'Legs') {oppoPlayer.legsLane.receiveDamage(currCard.damage)};
@@ -64,7 +65,7 @@ var resolution = function(match) {
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
       if(currCard.cost <= currPlayer.stamina) {
-        updateCardMessage(oppoPlayer);
+        currPlayer.updateCardMessage(oppoPlayer);
       }
     }
     currPlayer.reset();

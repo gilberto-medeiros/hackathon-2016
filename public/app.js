@@ -79,6 +79,13 @@ function processSingleEvent(msg) {
         remotePlayer.laneLife.addHealthDamage(msg.healthDamage.lane, msg.healthDamage.value);
       }
     }
+
+    if ('stackBlock' in msg) {
+        //$('#messages').append($('<li>').text('hand ' + msg.setHand));
+        //msg.damage
+        //msg.lane
+        //TODO Handle block stacking
+    }
 }
 
 // get generic state events from server
