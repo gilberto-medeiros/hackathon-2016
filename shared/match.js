@@ -19,7 +19,7 @@ class Match {
         player.socket.on('disconnect', function() {
             console.log('user disconnected');
             //socket.broadcast.emit('event', 'a user disconnected');
-            player.socket.broadcast.emit('event', {txt : 'player ' + player.id + ' left'});
+            player.socket.broadcast.emit('event', {txt : 'player ' + player.id + ' left', disconnect: 'disconnect'});
         });
         player.socket.on('play card', function(msg) {
             console.log('card '+ msg.handIndex + ' from player ' + msg.playerid);

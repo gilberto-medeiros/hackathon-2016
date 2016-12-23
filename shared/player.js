@@ -53,6 +53,20 @@ class Player {
     }*/
   }
 
+  receiveDamage(lane, damage){
+      switch(lane) {
+          case 'Head':
+              this.headLane.receiveDamage(damage);
+              break;
+          case 'Body':
+              this.bodyLane.receiveDamage(damage);
+              break;
+          case 'Legs':
+              this.legsLane.receiveDamage(damage);
+              break;
+      }
+  }
+
   setUnblockable(){
       this.headLane.setBlockable(false);
       this.bodyLane.setBlockable(false);

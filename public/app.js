@@ -23,6 +23,10 @@ socket.on('chat message', function(msg){
 });
 
 function processSingleEvent(msg) {
+    if ('disconnect' in msg) {
+        console.log(msg);
+        this.endGame();
+    }
   if ('txt' in msg) {
     console.log(msg);
     $('#messages').append($('<li>').text(msg.txt));
@@ -67,6 +71,10 @@ function getCardDefById(cardId) {
 
 function ready(){
     socket.emit('ready', {'playerid':playerid});
+}
+
+function endGame(){
+    //TODO: Do something
 }
 
 function addResourcesFromCards(resources) {
