@@ -97,7 +97,7 @@ class Player {
         oppoPlayer.pushMessageToClient({'opponentPlayCard': this.getCardInHand(this.currHandIndex).id});
         this.pushMessageToClient({'playCard': this.currHandIndex});
         this.deck.playCard();
-        this.pushMessageToClient({'addCard': this.getCardInHand().id});
+        this.pushMessageToClient({'addCard': this.deck.getCardInHand(4).id});
     }
 }
 
