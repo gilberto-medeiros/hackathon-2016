@@ -48,7 +48,6 @@ function processSingleEvent(msg) {
 // get generic state events from server
 socket.on('event', function(msg){
   if( msg.constructor === Array ) {
-    console.log('IS ARRAY');
     for (var i = 0; i < msg.length; i++) {
       processSingleEvent(msg[i]);
     }
