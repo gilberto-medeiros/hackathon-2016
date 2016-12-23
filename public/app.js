@@ -13,8 +13,8 @@ $('form').submit(function(){
     return false;
 });
 
-$('#ready').submit(function(){
-    socket.emit('ready', {'playerid':playerid});
+$('#next-turn').submit(function(){
+    socket.emit('next-turn', {'playerid':playerid});
 });
 
 // get chat messages from server
@@ -54,6 +54,11 @@ function getCardDefById(cardId) {
     if(cardDefs.cards[cardIndex].id == cardId) return cardDefs.cards[cardIndex];
   }
 }
+
+function ready(){
+    socket.emit('ready', {'playerid':playerid});
+}
+
 $.getJSON('../shared/cards.json', function(response){
     cardDefs = response;
     console.log(cardDefs.cards[0].id);

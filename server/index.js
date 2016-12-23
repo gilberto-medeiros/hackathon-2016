@@ -33,7 +33,7 @@ io.on('connection', function(socket){
 
     player.socket = socket;
 
-    socket.emit('event', {txt : 'you connected with id ' + player.id, 'setId': player.id});
+    socket.emit('event', {txt : 'You joined match ' + matchId + ' with player id ' + player.id});
 
     // recieve chat messages from a client
     socket.on('chat message', function(msg) {
@@ -42,9 +42,4 @@ io.on('connection', function(socket){
     });
 
     match.addPlayer(player);
-
-
-    if (match.isMatchFull()) {
-        match.start();
-    }
 });
