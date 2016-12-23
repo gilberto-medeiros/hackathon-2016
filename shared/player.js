@@ -15,7 +15,6 @@ class Player {
     this.headLane = new HeadLane();
     this.bodyLane = new BodyLane();
     this.legsLane = new LegsLane();
-
     this.currHandIndex = -1;
     this.messageList = [];
   }
@@ -52,6 +51,18 @@ class Player {
       var message = this.messageList[i];
       this.socket.emit()
     }*/
+  }
+
+  setUnblockable(){
+      this.headLane.setBlockable(false);
+      this.bodyLane.setBlockable(false);
+      this.legsLane.setBlockable(false);
+  }
+
+  reset(){
+      this.headLane.setBlockable(true);
+      this.bodyLane.setBlockable(true);
+      this.legsLane.setBlockable(true);
   }
 }
 

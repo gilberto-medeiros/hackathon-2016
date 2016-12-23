@@ -49,8 +49,6 @@ var resolution = function(match) {
       match.players[i].reset()
     }
   }
-
-
 }
 
 module.exports = resolution
