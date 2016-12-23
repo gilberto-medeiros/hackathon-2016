@@ -2,17 +2,17 @@ class PlayerVisual {
   constructor(isLocalPlayer) {
     this.isLocalPlayer = isLocalPlayer;
 
-    this.createVisual();
+    //this.createVisual();
 
     this.laneLife = new LaneLife(isLocalPlayer, 20, 30, 40);
     if (!isLocalPlayer) {
       var size = cc.director.getWinSize();
       this.laneLife.node.reduce();
-      this.laneLife.node.x = size.width - 160;
-      this.laneLife.node.y = size.height - 100;
+      this.laneLife.node.x = size.width - 30;
+      this.laneLife.node.y = size.height - 10;
     }
   }
-
+/*
   createVisual() {
     this.bg = cc.LayerColor.create(cc.color(100,255,100,0), 400, 250);
     this.bg.ignoreAnchor = false;
@@ -80,5 +80,5 @@ class PlayerVisual {
     genericLane.setLaneName("Lane");
     genericLane.y = this.bg.height * 0.325 - genericLane.height*0.5;
   }
-
+*/
 }
