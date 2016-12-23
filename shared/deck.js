@@ -8,9 +8,9 @@ class Deck {
 
   getCardInHand(cardIndex) {
     var cardID = this.hand[cardIndex];
-    //console.log(cardID);
+    //console.log('cardID ' + cardID);
     var cardDef = this.definition.cardsDefinition.getCardDefinition(cardID);
-    //console.log(cardDef);
+    //console.log('cardDef ' + cardDef);
     return this.definition.cardsDefinition.createCard(cardDef)
   }
 
