@@ -64,16 +64,23 @@ function processSingleEvent(msg) {
 
     if ('blockDamage' in msg) {
         //$('#messages').append($('<li>').text('hand ' + msg.setHand));
-        //message.damage
-        //message.lane
+        //msg.damage
+        //msg.lane
         //TODO Handle block damage
     }
 
     if ('healthDamage' in msg) {
         //$('#messages').append($('<li>').text('hand ' + msg.setHand));
-        //message.damage
-        //message.lane
+        //msg.damage
+        //msg.lane
         //TODO Handle block damage
+    }
+
+    if ('stackBlock' in msg) {
+        //$('#messages').append($('<li>').text('hand ' + msg.setHand));
+        //msg.damage
+        //msg.lane
+        //TODO Handle block stacking
     }
 }
 

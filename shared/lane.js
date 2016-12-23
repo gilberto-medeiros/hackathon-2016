@@ -25,7 +25,8 @@ class Lane {
     }
   }
 
-  stackBlock(block) {
+  stackBlock(block, player, lane) {
+    player.pushMessageToClient({'stackBlock': {'lane': lane , 'value': block}});
     this.block += block;
   }
 
