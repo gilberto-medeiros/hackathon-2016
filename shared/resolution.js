@@ -25,9 +25,10 @@ var resolution = function(match) {
 
       // Pre Process Blocks
       if (currCard.constructor === Block) {
-        if(currCard.target == 'Head') {currPlayer.headLane.stackBlock(currCard.damage)};
-        if(currCard.target == 'Body') {currPlayer.bodyLane.stackBlock(currCard.damage)};
-        if(currCard.target == 'Legs') {currPlayer.legsLane.stackBlock(currCard.damage)};
+        currPlayer.stackBlock(currCard.damage, currCard.target);
+        //if(currCard.target == 'Head') {currPlayer.headLane.stackBlock(currCard.damage)};
+        //if(currCard.target == 'Body') {currPlayer.bodyLane.stackBlock(currCard.damage)};
+        //if(currCard.target == 'Legs') {currPlayer.legsLane.stackBlock(currCard.damage)};
       }
 
       // Pre Process attack
