@@ -87,18 +87,18 @@ class Player {
         this.legsLane.setBlockable(false);
     }
 
-    reset(oppoPlayer){
-        if (this.currHandIndex != -1) {
-            oppoPlayer.pushMessageToClient({'opponentPlayCard': this.getCardInHand(this.currHandIndex).id});
-            this.pushMessageToClient({'playCard': this.currHandIndex,
-                'addCard': this.deck.playCard()});
-        }
-
+    reset(){
         this.headLane.setBlockable(true);
         this.bodyLane.setBlockable(true);
         this.legsLane.setBlockable(true);
 
         this.currHandIndex = -1;
+    }
+
+    updateCardMessage(oppoPlayer) {
+        oppoPlayer.pushMessageToClient({'opponentPlayCard': this.getCardInHand(this.currHandIndex).id});
+        this.pushMessageToClient({'playCard': this.currHandIndex,
+            'addCard': this.deck.playCard()});
     }
 }
 
