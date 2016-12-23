@@ -40,7 +40,7 @@ class Player {
     }
 
     sendMessageList() {
-      console.log(this.deck.hand);
+      //console.log(this.deck.hand);
         if (this.stamina > 10) {
             this.stamina = 10;
         }
