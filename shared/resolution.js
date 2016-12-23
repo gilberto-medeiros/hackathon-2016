@@ -61,7 +61,13 @@ var resolution = function(match) {
   for (i in match.players) {
     var currPlayer = match.players[i];
     var oppoPlayer = getOpponent(i);
-    currPlayer.reset(oppoPlayer)
+    if(currPlayer.currHandIndex != -1) {
+      var currCard = currPlayer.getCardInHand();
+      if(currCard.cost <= currPlayer.stamina) {
+        updateCardMessage(oppoPlayer);
+      }
+    }
+    currPlayer.reset();
   }
 }
 
