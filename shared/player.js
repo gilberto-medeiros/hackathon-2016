@@ -51,6 +51,7 @@ class Player {
     }
 
     receiveDamage(damage, lane, oppoPlayer){
+      console.log("damage " + damage);
         switch(lane) {
             case 'Head':
                 this.headLane.receiveDamage(damage, this, lane, oppoPlayer);
@@ -65,6 +66,7 @@ class Player {
     }
 
     stackBlock(block, lane, oppoPlayer){
+      console.log("damage block " + block);
         switch(lane) {
             case 'Head':
                 this.headLane.stackBlock(block, this, lane, oppoPlayer);

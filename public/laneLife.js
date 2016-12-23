@@ -87,11 +87,11 @@ class LaneLife {
 
   addBlockDamage(lane, diff) {
     if (lane == "Head") {
-      this.headLabel.blockLabel.text = Integer.parseInt(this.headLabel.blockLabel.text) - diff;
+      this.headLabel.blockLabel.text = parseInt(this.headLabel.blockLabel.text) - diff;
     } else if (lane == "Body") {
-      this.bodyLabel.blockLabel.text = Integer.parseInt(this.bodyLabel.blockLabel.text) - diff;
+      this.bodyLabel.blockLabel.text = parseInt(this.bodyLabel.blockLabel.text) - diff;
     } else if (lane == "Legs") {
-      this.legLabel.blockLabel.text = Integer.parseInt(this.legLabel.blockLabel.text) - diff;
+      this.legLabel.blockLabel.text = parseInt(this.legLabel.blockLabel.text) - diff;
     }
   }
 

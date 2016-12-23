@@ -25,7 +25,7 @@ var resolution = function(match) {
 
       // Pre Process Blocks
       if (currCard.constructor === Block) {
-        currPlayer.stackBlock(currCard.damage, currCard.target, oppoPlayer);
+        currPlayer.stackBlock(currCard.power, currCard.target, oppoPlayer);
         //if(currCard.target == 'Head') {currPlayer.headLane.stackBlock(currCard.damage)};
         //if(currCard.target == 'Body') {currPlayer.bodyLane.stackBlock(currCard.damage)};
         //if(currCard.target == 'Legs') {currPlayer.legsLane.stackBlock(currCard.damage)};
@@ -50,7 +50,7 @@ var resolution = function(match) {
       if(currCard.cost > currPlayer.stamina) break;
 
       if (currCard.constructor === Attack) {
-        oppoPlayer.receiveDamage(currCard.damage, currCard.target, currPlayer);
+        oppoPlayer.receiveDamage(currCard.power, currCard.target, currPlayer);
         //if(currCard.target == 'Head') {oppoPlayer.headLane.receiveDamage(currCard.damage)};
         //if(currCard.target == 'Body') {oppoPlayer.bodyLane.receiveDamage(currCard.damage)};
         //if(currCard.target == 'Legs') {oppoPlayer.legsLane.receiveDamage(currCard.damage)};

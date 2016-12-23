@@ -49,7 +49,6 @@ function processSingleEvent(msg) {
   }
 
   if ('playCard' in msg) {
-    console.log('play card ' + msg.playCard);
     PlayCard(msg.playCard);
   }
 
