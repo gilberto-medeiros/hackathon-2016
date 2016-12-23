@@ -91,24 +91,36 @@ class LaneLife {
     return node;
   }
 
+  highlightTextNode(node) {
+    node.runAction(new cc.Sequence([new cc.ScaleBy(0.15, 2),
+                                      new cc.ScaleBy(0.15, 0.5),
+                                      new cc.ScaleBy(0.15, 2),
+                                      new cc.ScaleBy(0.15, 0.5)]));
+  }
+
   addBlockDamage(lane, diff) {
     if (lane == "Head") {
       this.headLabel.blockLabel.string = parseInt(this.headLabel.blockLabel.string) - diff;
+      this.highlightTextNode(this.headLabel.blockLabel);
     } else if (lane == "Body") {
       this.bodyLabel.blockLabel.string = parseInt(this.bodyLabel.blockLabel.string) - diff;
+      this.highlightTextNode(this.bodyLabel.blockLabel);
     } else if (lane == "Legs") {
       this.legLabel.blockLabel.string = parseInt(this.legLabel.blockLabel.string) - diff;
+      this.highlightTextNode(this.legLabel.blockLabel);
     }
   }
 
   addHealthDamage(lane, diff) {
-    console.log("lane " + lane + " " + diff);
     if (lane === "Head") {
       this.setHeadHealth(this.headHealth - diff);
+      this.highlightTextNode(this.headLabel);
     } else if (lane === "Body") {
       this.setBodyHealth(this.bodyHealth - diff);
+      this.highlightTextNode(this.bodyLabel);
     } else if (lane === "Legs") {
       this.setLegHealth(this.legHealth - diff);
+      this.highlightTextNode(this.legLabel);
     }
   }
 }
