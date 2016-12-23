@@ -80,10 +80,12 @@ function processSingleEvent(msg) {
     }
 
     if ('stackBlock' in msg) {
-        //$('#messages').append($('<li>').text('hand ' + msg.setHand));
-        //msg.damage
-        //msg.lane
-        //TODO Handle block stacking
+      if (msg.stackBlock.localPlayer) {
+        localPlayer.laneLife.addBlockDamage(msg.stackBlock.lane, -msg.stackBlock.value);
+      }
+      else {
+        remotePlayer.laneLife.addBlockDamage(msg.stackBlock.lane, -msg.stackBlock.value);
+      }
     }
 }
 

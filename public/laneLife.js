@@ -14,6 +14,7 @@ class LaneLife {
   setHeadHealth(newValue) {
     this.headHealth = newValue;
     if (this.headLabel != undefined) {
+      this.headLabel.string = newValue;
       var sprite = this.headLabel.getChildren()[0];
       sprite.x = this.headLabel.width*0.5;
       sprite.y = this.headLabel.height*0.5;
@@ -23,6 +24,7 @@ class LaneLife {
   setBodyHealth(newValue) {
     this.bodyHealth = newValue;
     if (this.bodyLabel != undefined) {
+      this.bodyLabel.string = newValue;
       var sprite = this.bodyLabel.getChildren()[0];
       sprite.x = this.bodyLabel.width*0.5;
       sprite.y = this.bodyLabel.height*0.5;
@@ -32,6 +34,7 @@ class LaneLife {
   setLegHealth(newValue) {
     this.legHealth = newValue;
     if (this.legLabel != undefined) {
+      this.legLabel.string = newValue;
       var sprite = this.legLabel.getChildren()[0];
       sprite.x = this.legLabel.width*0.5;
       sprite.y = this.legLabel.height*0.5;
@@ -87,21 +90,22 @@ class LaneLife {
 
   addBlockDamage(lane, diff) {
     if (lane == "Head") {
-      this.headLabel.blockLabel.text = parseInt(this.headLabel.blockLabel.text) - diff;
+      this.headLabel.blockLabel.string = parseInt(this.headLabel.blockLabel.string) - diff;
     } else if (lane == "Body") {
-      this.bodyLabel.blockLabel.text = parseInt(this.bodyLabel.blockLabel.text) - diff;
+      this.bodyLabel.blockLabel.string = parseInt(this.bodyLabel.blockLabel.string) - diff;
     } else if (lane == "Legs") {
-      this.legLabel.blockLabel.text = parseInt(this.legLabel.blockLabel.text) - diff;
+      this.legLabel.blockLabel.string = parseInt(this.legLabel.blockLabel.string) - diff;
     }
   }
 
   addHealthDamage(lane, diff) {
-    if (lane == "Head") {
-      this.setHeadHealth(this.headHealth + diff);
-    } else if (lane == "Body") {
-      this.setBodyHealth(this.bodyHealth + diff);
-    } else if (lane == "Legs") {
-      this.setLegHealth(this.legHealth + diff);
+    console.log("lane " + lane + " " + diff);
+    if (lane === "Head") {
+      this.setHeadHealth(this.headHealth - diff);
+    } else if (lane === "Body") {
+      this.setBodyHealth(this.bodyHealth - diff);
+    } else if (lane === "Legs") {
+      this.setLegHealth(this.legHealth - diff);
     }
   }
 }
