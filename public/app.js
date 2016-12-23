@@ -13,6 +13,10 @@ $('form').submit(function(){
     return false;
 });
 
+$('#ready').submit(function(){
+    socket.emit('ready', {'playerid':playerid});
+});
+
 // get chat messages from server
 socket.on('chat message', function(msg){
     console.log('text');
