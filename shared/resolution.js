@@ -1,17 +1,30 @@
+var Attack = require('../shared/attack')
+var Block = require('../shared/block')
+var Counter = require('../shared/counter')
+
 var resolution = function(match) {
+
+  var getOpponent = function(index) {
+    return match.players[index == 0 ? 1 : 0];
+  }
 
   // Pre process
   for (i in match.players) {
     var currPlayer = match.players[i];
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
+
+      // Pre Process Blocks
       if (currCard.constructor === Block) {
-        console.log('it is a block')
+        if(currCard.target == 'Head') {player.headLane.stackBlock(currCard.damage)};
+        if(currCard.target == 'Body') {player.bodyLane.stackBlock(currCard.damage)};
+        if(currCard.target == 'Legs') {player.legsLane.stackBlock(currCard.damage)};
       }
-      // Process blocks
-      
+
     }
   }
+
+
 }
 
 module.exports = resolution
