@@ -3,6 +3,8 @@
  */
 
  var playerid;
+ var localPlayer;
+ var remotePlayer;
 // Send messages to server
 var socket = io(window.location.origin + ":3000");
 $('form').submit(function(){
@@ -36,7 +38,9 @@ socket.on('event', function(msg){
 
     if ('setHand' in msg) {
       $('#messages').append($('<li>').text('hand ' + msg.setHand));
-      CreateHand(msg.setHand)
+      CreateHand(msg.setHand);
+      localPlayer = new PlayerVisual(true, 1, 10, 10, 10);
+      remotePlayer = new PlayerVisual(false, 1, 10, 10, 10);
     }
 });
 
