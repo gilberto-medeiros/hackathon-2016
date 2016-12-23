@@ -40,8 +40,8 @@ function processSingleEvent(msg) {
   if ('setHand' in msg) {
     $('#messages').append($('<li>').text('hand ' + msg.setHand));
     CreateHand(msg.setHand);
-    localPlayer = new PlayerVisual(true, 1, 10, 10, 10);
-    remotePlayer = new PlayerVisual(false, 1, 10, 10, 10);
+    localPlayer = new PlayerVisual(true);
+    remotePlayer = new PlayerVisual(false);
   }
 }
 
