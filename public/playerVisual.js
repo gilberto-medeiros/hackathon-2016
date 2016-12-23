@@ -1,34 +1,24 @@
 class PlayerVisual {
-  constructor(isLocalPlayer, stamina, headHealth, bodyHealth, legHealth) {
+  constructor(isLocalPlayer) {
     this.isLocalPlayer = isLocalPlayer;
-    this.setStamina(stamina);
-    this.setHeadHealth(headHealth);
-    this.setBodyHealth(bodyHealth);
-    this.setlegHealth(legHealth);
 
     this.createVisual();
-  }
 
-  setStamina(newStamina) {
-    this.stamina = newStamina;
-  }
-
-  setHeadHealth(newValue) {
-    this.headHealth = newValue;
-  }
-  setBodyHealth(newValue) {
-    this.bodyHealth = newValue;
-  }
-  setlegHealth(newValue) {
-    this.legHealth = newValue;
+    this.laneLife = new LaneLife(isLocalPlayer, 20, 30, 40);
+    if (!isLocalPlayer) {
+      var size = cc.director.getWinSize();
+      this.laneLife.node.reduce();
+      this.laneLife.node.x = size.width - 160;
+      this.laneLife.node.y = size.height - 100;
+    }
   }
 
   createVisual() {
-    this.bg = cc.LayerColor.create(cc.color(100,100,100,20), 400, 500);
+    this.bg = cc.LayerColor.create(cc.color(100,255,100,0), 400, 250);
     this.bg.ignoreAnchor = false;
     this.bg.anchorX = 0;
     this.bg.anchorY = 1;
-    this.bg.y = 760;
+    this.bg.y = 550;
     if (this.isLocalPlayer) {
       this.bg.x = 10;
     }
@@ -47,7 +37,7 @@ class PlayerVisual {
 
   createGenericLane() {
     var padding = 10;
-    var lane = cc.LayerColor.create(cc.color(100,100,100,20), this.bg.width - padding*2, this.bg.height * 0.3);
+    var lane = cc.LayerColor.create(cc.color(100,100,100,150), this.bg.width - padding*2, this.bg.height * 0.3);
     lane.ignoreAnchor = false;
     lane.anchorX =  0;
     lane.anchorY = 0.5;

@@ -37,7 +37,7 @@ class Player {
 
   tick() {
     this.addStamina(3+this.headLane.getBonus());
-    this.pushMessageToClient({'setStamina': this.stamina})
+    this.pushMessageToClient({'setStamina': this.stamina});
   }
 
   pushMessageToClient(newMessage) {
