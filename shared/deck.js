@@ -6,6 +6,14 @@ class Deck {
     this.addCardToHand();
   }
 
+  getCardInHand(cardIndex) {
+    var cardID = this.hand[cardIndex];
+    //console.log(cardID);
+    var cardDef = this.definition.cardsDefinition.getCardDefinition(cardID);
+    //console.log(cardDef);
+    return this.definition.cardsDefinition.createCard(cardDef)
+  }
+
   playCard(cardIndex) {
     var cardID = this.hand.splice(cardIndex, 1);
     this.addCardToHand();
