@@ -19,16 +19,34 @@ var resolution = function(match) {
 
       // Pre Process Blocks
       if (currCard.constructor === Block) {
-        if(currCard.target == 'Head') {player.headLane.stackBlock(currCard.damage)};
-        if(currCard.target == 'Body') {player.bodyLane.stackBlock(currCard.damage)};
-        if(currCard.target == 'Legs') {player.legsLane.stackBlock(currCard.damage)};
+        if(currCard.target == 'Head') {currPlayer.headLane.stackBlock(currCard.damage)};
+        if(currCard.target == 'Body') {currPlayer.bodyLane.stackBlock(currCard.damage)};
+        if(currCard.target == 'Legs') {currPlayer.legsLane.stackBlock(currCard.damage)};
       }
 
       // Pre Process attack
       if (currCard.constructor === Attack) {
-        //currPlayer.setBlockable(false);
+        currPlayer.setBlockable(false);
       }
 
+    }
+
+    // Process damage
+    for (i in match.players) {
+      // Get players
+      var currPlayer = match.players[i];
+      var oppoPlayer = getOpponent(i);
+
+      if (currCard.constructor === Attack) {
+        if(currCard.target == 'Head') {oppoPlayer.headLane.receiveDamage(currCard.damage)};
+        if(currCard.target == 'Body') {oppoPlayer.bodyLane.receiveDamage(currCard.damage)};
+        if(currCard.target == 'Legs') {oppoPlayer.legsLane.receiveDamage(currCard.damage)};
+      }
+    }
+
+    // Reset
+    for (i in match.players) {
+      match.players[i].reset()
     }
   }
 
