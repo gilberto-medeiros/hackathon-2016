@@ -37,14 +37,16 @@ class Player {
 
   tick() {
     this.addStamina(3+this.headLane.getBonus());
+    this.pushMessageToClient({'setStamina': this.stamina})
   }
 
   pushMessageToClient(newMessage) {
-    messageList.push(newMessage);
+    this.messageList.push(newMessage);
   }
 
   sendMessageList() {
-    this.socket.emit('Turn Resolution', this.messageList);
+    console.log(this.messageList);
+    this.socket.emit('event', this.messageList);
     this.messageList = [];
     /*for (var i = 0; i < this.messageList.length; i++) {
       var message = this.messageList[i];

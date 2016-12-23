@@ -87,11 +87,11 @@ class Match {
             var player = this.players[playerIndex];
             player.tick();
             // send stamina update
-            player.socket.emit('event', {'setStamina': player.stamina});
+            //player.socket.emit('event', {'setStamina': player.stamina});
         }
         for (var playerIndex in this.players) {
             var player = this.players[playerIndex];
-            //player.sendMessageList();
+            player.sendMessageList();
         }
     }
 
