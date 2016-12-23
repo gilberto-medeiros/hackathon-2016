@@ -18,7 +18,9 @@ var resolution = function(match) {
       var currCard = currPlayer.getCardInHand();
 
       // Process stamina
-      currPlayer.addStamina(-currCard.cost);
+      //console.log(currCard.cost);
+      staminaCost = currCard.cost;
+      currPlayer.addStamina(-staminaCost);
 
       // Pre Process Blocks
       if (currCard.constructor === Block) {
@@ -46,9 +48,10 @@ var resolution = function(match) {
 
 
       if (currCard.constructor === Attack) {
-        if(currCard.target == 'Head') {oppoPlayer.headLane.receiveDamage(currCard.damage)};
-        if(currCard.target == 'Body') {oppoPlayer.bodyLane.receiveDamage(currCard.damage)};
-        if(currCard.target == 'Legs') {oppoPlayer.legsLane.receiveDamage(currCard.damage)};
+        oppoPlayer.receiveDamage(currCard.damage, currCard.target);
+        //if(currCard.target == 'Head') {oppoPlayer.headLane.receiveDamage(currCard.damage)};
+        //if(currCard.target == 'Body') {oppoPlayer.bodyLane.receiveDamage(currCard.damage)};
+        //if(currCard.target == 'Legs') {oppoPlayer.legsLane.receiveDamage(currCard.damage)};
       }
     }
   }
