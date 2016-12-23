@@ -30,12 +30,17 @@ var resolution = function(match) {
       }
 
     }
+  }
 
-    // Process damage
-    for (i in match.players) {
-      // Get players
-      var currPlayer = match.players[i];
-      var oppoPlayer = getOpponent(i);
+  // Process damage
+  for (i in match.players) {
+    // Get players
+    var currPlayer = match.players[i];
+    var oppoPlayer = getOpponent(i);
+
+    if(currPlayer.currHandIndex != -1) {
+      var currCard = currPlayer.getCardInHand();
+
 
       if (currCard.constructor === Attack) {
         if(currCard.target == 'Head') {oppoPlayer.headLane.receiveDamage(currCard.damage)};
@@ -43,11 +48,13 @@ var resolution = function(match) {
         if(currCard.target == 'Legs') {oppoPlayer.legsLane.receiveDamage(currCard.damage)};
       }
     }
+  }
 
-    // Reset
-    for (i in match.players) {
-      match.players[i].reset()
-    }
+  // Reset
+  for (i in match.players) {
+    var currPlayer = match.players[i];
+    currPlayer.
+    match.players[i].reset()
   }
 }
 
