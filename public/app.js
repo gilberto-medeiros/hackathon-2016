@@ -101,15 +101,19 @@ $.getJSON('../shared/cards.json', function(response){
                 this.addChild(sprite, -10);
 
                 staminaBar = cc.LayerColor.create(cc.color(0,0,255,255), staminaBarUnitScreenWidth, 30);
-                staminaBar.x = 70;
-                staminaBar.y = 225;
+                staminaBar.x = 15;
+                staminaBar.y = 250;
 
-                var staminaBarBG = cc.LayerColor.create(cc.color(0,0,0,255), staminaBarUnitScreenWidth*10 + 10, staminaBar.height + 10);
+                var staminaBarBG = cc.LayerColor.create(cc.color(100,100,100,200), staminaBarUnitScreenWidth*10 + 10, staminaBar.height + 10);
                 staminaBarBG.x = staminaBar.x - 5;
                 staminaBarBG.y = staminaBar.y - 5
 
                 this.addChild(staminaBarBG, 1);
                 this.addChild(staminaBar, 2);
+
+                var shadow = new cc.Sprite("art/Interface__0000s_0001_Down-Interface.png");
+                shadow.ignoreAnchor = true;
+                this.addChild(shadow,-9);
             }
         });
         gameScene = new MyScene();

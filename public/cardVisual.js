@@ -16,6 +16,12 @@ class CardVisual {
       this.bg = new cc.Sprite(this.cardDef.art);
       this.bg.ignoreAnchor = true;
       this.bgHasArt = true;
+
+      var shadow = new cc.Sprite("art/card__0009_Shadow.png");
+      shadow.ignoreAnchor = true;
+      shadow.x = -4;
+      shadow.y = -7;
+      this.bg.addChild(shadow,-1);
     }
     this.bg.anchorY = 0;
     gameScene.addChild(this.bg, 3);
@@ -88,7 +94,7 @@ class CardVisual {
     // check KO
     if (this.cardDef.special == "KO") {
       var label = cc.LabelTTF.create("KO", "Arial", 12);
-      label.color = cc.color(255,0,255,255);
+      label.color = cc.color(255,140,0,255);
       label.anchorX = 0.5;
       label.anchorY = 0.5;
       label.x = this.bg.width*0.5;
@@ -135,8 +141,8 @@ function CreateHand(hand) {
     //console.log('hand[' + handIndex + '] = ' + hand[handIndex]);
     var vis = new CardVisual(getCardDefById(hand[handIndex]), handIndex);
     var root = vis.createVisual();
-    root.x = 80 + offset;
-    root.y = 5;
+    root.x = 280 + offset;
+    root.y = 16;
     offset += 150;
     handVisuals.push(vis);
   }
