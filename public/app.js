@@ -102,7 +102,7 @@ $.getJSON('../shared/cards.json', function(response){
 
                 staminaBar = cc.LayerColor.create(cc.color(0,0,255,255), staminaBarUnitScreenWidth, 30);
                 staminaBar.x = 70;
-                staminaBar.y = 5;
+                staminaBar.y = 225;
 
                 var staminaBarBG = cc.LayerColor.create(cc.color(0,0,0,255), staminaBarUnitScreenWidth*10 + 10, staminaBar.height + 10);
                 staminaBarBG.x = staminaBar.x - 5;
