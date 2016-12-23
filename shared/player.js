@@ -44,6 +44,9 @@ class Player {
         if (this.stamina > 10) {
             this.stamina = 10;
         }
+        if (this.stamina < 0) {
+            this.stamina = 0;
+        }
         this.pushMessageToClient({'setStamina': this.stamina});
         console.log("player " + this.id + " will get messages ");
         console.log(this.messageList);
