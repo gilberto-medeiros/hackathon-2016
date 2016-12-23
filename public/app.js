@@ -3,12 +3,18 @@
  */
 
  var playerid;
+ var localPlayer;
+ var remotePlayer;
 // Send messages to server
 var socket = io(window.location.origin + ":3000");
 $('form').submit(function(){
     socket.emit('chat message', $('#m').val());
     $('#m').val('');
     return false;
+});
+
+$('#next-turn').submit(function(){
+    socket.emit('next-turn', {'playerid':playerid});
 });
 
 // get chat messages from server
@@ -36,7 +42,9 @@ socket.on('event', function(msg){
 
     if ('setHand' in msg) {
       $('#messages').append($('<li>').text('hand ' + msg.setHand));
-      CreateHand(msg.setHand)
+      CreateHand(msg.setHand);
+      localPlayer = new PlayerVisual(true, 1, 10, 10, 10);
+      remotePlayer = new PlayerVisual(false, 1, 10, 10, 10);
     }
 });
 
@@ -46,6 +54,11 @@ function getCardDefById(cardId) {
     if(cardDefs.cards[cardIndex].id == cardId) return cardDefs.cards[cardIndex];
   }
 }
+
+function ready(){
+    socket.emit('ready', {'playerid':playerid});
+}
+
 $.getJSON('../shared/cards.json', function(response){
     cardDefs = response;
     console.log(cardDefs.cards[0].id);
