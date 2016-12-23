@@ -8,7 +8,7 @@ class Lane {
   }
 
   receiveDamage(damage) {
-    if(isBlockable){
+    if(this.isBlockable){
       if(this.block - damage >= 0){
         this.block -= damage;
       }else{
