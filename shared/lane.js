@@ -7,26 +7,31 @@ class Lane {
     this.isBlockable = true;
   }
 
-  receiveDamage(damage, player, lane) {
+  receiveDamage(damage, player, lane, oppoPlayer) {
     if(this.isBlockable){
       if(this.block - damage >= 0){
         this.block -= damage;
-        player.pushMessageToClient({'blockDamage': {'lane': lane , 'value': damage}});
+        player.pushMessageToClient({'blockDamage': {'lane': lane , 'value': damage, 'localPlayer': true}});
+        oppoPlayer.pushMessageToClient({'blockDamage': {'lane': lane , 'value': damage, 'localPlayer': false}});
       }else{
         var dif = Math.abs(this.block - damage);
-          player.pushMessageToClient({'blockDamage': {'lane': lane , 'value': block}});
+          player.pushMessageToClient({'blockDamage': {'lane': lane , 'value': block, 'localPlayer': true}});
+          oppoPlayer.pushMessageToClient({'blockDamage': {'lane': lane , 'value': damage, 'localPlayer': false}});
         this.block = 0;
         this.health -= dif;
-          player.pushMessageToClient({'healthDamage': {'lane': lane , 'value': dif}});
+          player.pushMessageToClient({'healthDamage': {'lane': lane , 'value': dif, 'localPlayer': true}});
+          oppoPlayer.pushMessageToClient({'blockDamage': {'lane': lane , 'value': damage, 'localPlayer': false}});
       }
     }else{
       this.health -= damage;
-        player.pushMessageToClient({'healthDamage': {'lane': lane , 'value': damage}});
+        player.pushMessageToClient({'healthDamage': {'lane': lane , 'value': damage, 'localPlayer': true}});
+        oppoPlayer.pushMessageToClient({'blockDamage': {'lane': lane , 'value': damage, 'localPlayer': false}});
     }
   }
 
-  stackBlock(block, player, lane) {
-    player.pushMessageToClient({'stackBlock': {'lane': lane , 'value': block}});
+  stackBlock(block, player, lane, oppoPlayer) {
+    player.pushMessageToClient({'stackBlock': {'lane': lane , 'value': block, 'localPlayer': true}});
+    oppoPlayer.pushMessageToClient({'blockDamage': {'lane': lane , 'value': damage, 'localPlayer': false}});
     this.block += block;
   }
 

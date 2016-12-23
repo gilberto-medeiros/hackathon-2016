@@ -53,30 +53,30 @@ class Player {
        }*/
     }
 
-    receiveDamage(lane, damage){
+    receiveDamage(damage, lane, oppoPlayer){
         switch(lane) {
             case 'Head':
-                this.headLane.receiveDamage(damage, this, lane);
+                this.headLane.receiveDamage(damage, this, lane, oppoPlayer);
                 break;
             case 'Body':
-                this.bodyLane.receiveDamage(damage, this, lane);
+                this.bodyLane.receiveDamage(damage, this, lane, oppoPlayer);
                 break;
             case 'Legs':
-                this.legsLane.receiveDamage(damage, this, lane);
+                this.legsLane.receiveDamage(damage, this, lane, oppoPlayer);
                 break;
         }
     }
 
-    stackBlock(lane, block){
+    stackBlock(block, lane, oppoPlayer){
         switch(lane) {
             case 'Head':
-                this.headLane.stackBlock(block, this, lane);
+                this.headLane.stackBlock(block, this, lane, oppoPlayer);
                 break;
             case 'Body':
-                this.bodyLane.stackBlock(block, this, lane);
+                this.bodyLane.stackBlock(block, this, lane, oppoPlayer);
                 break;
             case 'Legs':
-                this.legsLane.stackBlock(block, this, lane);
+                this.legsLane.stackBlock(block, this, lane, oppoPlayer);
                 break;
         }
     }
@@ -91,7 +91,6 @@ class Player {
         this.headLane.setBlockable(true);
         this.bodyLane.setBlockable(true);
         this.legsLane.setBlockable(true);
-
         this.currHandIndex = -1;
     }
 
