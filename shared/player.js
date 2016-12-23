@@ -15,6 +15,8 @@ class Player {
     this.headLane = new HeadLane();
     this.bodyLane = new BodyLane();
     this.legsLane = new LegsLane();
+
+    this.messageList = [];
   }
 
   print() {
@@ -30,6 +32,19 @@ class Player {
 
   tick() {
     this.addStamina(3+this.headLane.getBonus());
+  }
+
+  pushMessageToClient(newMessage) {
+    messageList.push(newMessage);
+  }
+
+  sendMessageList() {
+    this.socket.emit('Turn Resolution', this.messageList);
+    this.messageList = [];
+    /*for (var i = 0; i < this.messageList.length; i++) {
+      var message = this.messageList[i];
+      this.socket.emit()
+    }*/
   }
 }
 
