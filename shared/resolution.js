@@ -17,6 +17,9 @@ var resolution = function(match) {
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
 
+      // Process stamina
+      currPlayer.addStamina(-currCard.cost);
+
       // Pre Process Blocks
       if (currCard.constructor === Block) {
         if(currCard.target == 'Head') {currPlayer.headLane.stackBlock(currCard.damage)};

@@ -15,7 +15,7 @@ class Deck {
   }
 
   playCard(cardIndex) {
-    var cardID = this.hand.splice(cardIndex, 1);
+    var cardID = this.hand.splice(cardIndex, 1)[0];
     this.addCardToHand();
     return cardID;
   }
