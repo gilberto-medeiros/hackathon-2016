@@ -78,7 +78,7 @@ $.getJSON('../shared/cards.json', function(response){
                     "art/Interface__0000s_0000_Number.png",
                     "art/Interface__0000s_0001_Down-Interface.png",];
     resources = addResourcesFromCards(resources);
-    console.log(resources);
+    
     //load resources
     cc.LoaderScene.preload(resources, function () {
         MyScene = cc.Scene.extend({

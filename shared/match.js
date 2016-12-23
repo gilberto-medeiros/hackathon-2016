@@ -6,6 +6,7 @@ class Match {
         this.id = id;
         this.players = [];
         this.activeCards = [];
+        this.turn = 0;
         this.resolution = require('../shared/resolution');
 
     }
@@ -33,6 +34,10 @@ class Match {
                 ref.start();
             }
         });
+        player.socket.on('next-turn', function(msg) {
+            console.log('player '+ player.id + ' changed turn');
+            ref.nextTurn();
+        })
         this.players.push(player);
         return true;
     }
@@ -44,7 +49,7 @@ class Match {
     notifyAllPlayers(msg) {
         for (var playerIndex in this.players) {
             var player = this.players[playerIndex];
-            player.socket.emit('event', msg);
+            player.socket.emit('event', {'txt':msg});
         }
     }
 
@@ -69,26 +74,31 @@ class Match {
         return this.players.length == 2;
     }
 
+    nextTurn(){
+        this.resolution(this);
+        for (var playerIndex in this.players) {
+            var player = this.players[playerIndex];
+            player.tick();
+            // send stamina update
+            player.socket.emit('event', {'setStamina': player.stamina});
+        }
+        for (var playerIndex in this.players) {
+            var player = this.players[playerIndex];
+            //player.sendMessageList();
+        }
+    }
+
     start(){
         console.log('match is starting');
         var waitInterval;
-        var ref = this;
+        //var ref = this;
+        this.sendHandsToPlayers();
+        this.nextTurn();
+        /*
         setInterval(function(){
-            //console.log(ref.players);
-            ref.resolution(ref);
-            for (var playerIndex in ref.players) {
-                var player = ref.players[playerIndex];
-                player.tick();
-                // send stamina update
-                player.socket.emit('event', {'setStamina': player.stamina});
-            }
-            for (var playerIndex in ref.players) {
-                var player = ref.players[playerIndex];
-                //player.sendMessageList();
-            }
+            ref.nextTurn();
         }, 1000, 1000);
-        ref.sendHandsToPlayers();
-        //io.emit('event', {txt : 'match ' + match.id + ' is starting'});
+        */
     }
 }
 

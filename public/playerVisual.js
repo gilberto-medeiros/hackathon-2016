@@ -49,7 +49,7 @@ class PlayerVisual {
     var padding = 10;
     var lane = cc.LayerColor.create(cc.color(100,100,100,20), this.bg.width - padding*2, this.bg.height * 0.3);
     lane.ignoreAnchor = false;
-    lane.anchorX = 0;
+    lane.anchorX =  0;
     lane.anchorY = 0.5;
     lane.x = padding;
     this.bg.addChild(lane);
