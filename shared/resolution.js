@@ -50,7 +50,7 @@ var resolution = function(match) {
       if(currCard.cost > currPlayer.stamina) break;
 
       if (currCard.constructor === Attack) {
-        oppoPlayer.receiveDamage(currCard.damage, currCard.target, oppoPlayer);
+        oppoPlayer.receiveDamage(currCard.damage, currCard.target, currPlayer);
         //if(currCard.target == 'Head') {oppoPlayer.headLane.receiveDamage(currCard.damage)};
         //if(currCard.target == 'Body') {oppoPlayer.bodyLane.receiveDamage(currCard.damage)};
         //if(currCard.target == 'Legs') {oppoPlayer.legsLane.receiveDamage(currCard.damage)};
