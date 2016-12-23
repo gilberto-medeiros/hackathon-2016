@@ -5,7 +5,6 @@ class Match {
     constructor(id) {
         this.id = id;
         this.players = [];
-        this.activeCards = [];
         this.resolution = require('../shared/resolution');
 
     }
@@ -29,8 +28,16 @@ class Match {
         return true;
     }
 
+    getPlayerByID(playerID) {
+      for (var i in this.players) {
+        if (this.players[i].id == playerID) {
+          return this.players[i];
+        }
+      }
+    }
+
     addActiveCard(playerID, handIndex) {
-        this.activeCards[playerID] = handIndex;
+      this.getPlayerByID(playerID).currHandIndex = handIndex;
     }
 
     sendHandsToPlayers() {

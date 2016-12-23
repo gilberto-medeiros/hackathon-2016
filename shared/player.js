@@ -15,6 +15,7 @@ class Player {
     this.headLane = new HeadLane();
     this.bodyLane = new BodyLane();
     this.legsLane = new LegsLane();
+    this.currHandIndex = -1;
   }
 
   print() {
@@ -26,6 +27,10 @@ class Player {
     if (this.stamina > 10) {
       this.stamina = 10;
     }
+  }
+
+  getCardInHand() {
+    return this.deck.getCardInHand(this.currHandIndex);
   }
 
   tick() {
