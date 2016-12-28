@@ -17,6 +17,7 @@ class Player {
         this.legsLane = new LegsLane();
         this.currHandIndex = -1;
         this.messageList = [];
+        this.attackWillBeCountered = false;
     }
 
     print() {
@@ -95,10 +96,15 @@ class Player {
         this.legsLane.setBlockable(false);
     }
 
+    setAttackWillBeCountered() {
+      this.attackWillBeCountered = true;
+    }
+
     reset(){
         this.headLane.setBlockable(true);
         this.bodyLane.setBlockable(true);
         this.legsLane.setBlockable(true);
+        this.attackWillBeCountered = false;
         this.currHandIndex = -1;
     }
 

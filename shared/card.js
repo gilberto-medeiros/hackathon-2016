@@ -4,7 +4,7 @@
 class Card {
 
     constructor(id, part, name, target, power, special, cost, isAttack, isBlock, isCounter) {
-        console.log('Creating Card');
+        //console.log('Creating Card');
         this.id = id;
         this.part = part;
         this.name = name;

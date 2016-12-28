@@ -39,6 +39,11 @@ var resolution = function(match) {
       if (currCard.isAttack) {
         currPlayer.setUnblockable();
       }
+
+      if (currCard.isCounter) {
+        currPlayer.setUnblockable();
+        oppoPlayer.setAttackWillBeCountered();
+      }
     }
   }
 
@@ -53,7 +58,7 @@ var resolution = function(match) {
       //if(currCard.cost > currPlayer.stamina) continue;
 
       //if (currCard.constructor === Attack) {
-      if (currCard.isAttack) {
+      if (currCard.isAttack && (!currPlayer.attackWillBeCountered) || currCard.isCounter) {
         oppoPlayer.receiveDamage(currCard.power, currCard.target, currPlayer);
         //if(currCard.target == 'Head') {oppoPlayer.headLane.receiveDamage(currCard.damage)};
         //if(currCard.target == 'Body') {oppoPlayer.bodyLane.receiveDamage(currCard.damage)};
