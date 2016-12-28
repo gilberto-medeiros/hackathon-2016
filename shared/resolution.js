@@ -26,7 +26,8 @@ var resolution = function(match) {
       currPlayer.addStamina(-staminaCost);
 
       // Pre Process Blocks
-      if (currCard.constructor === Block) {
+      //if (currCard.constructor === Block) {
+      if (currCard.isBlock) {
         currPlayer.stackBlock(currCard.power, currCard.target, oppoPlayer);
         //if(currCard.target == 'Head') {currPlayer.headLane.stackBlock(currCard.damage)};
         //if(currCard.target == 'Body') {currPlayer.bodyLane.stackBlock(currCard.damage)};
@@ -34,7 +35,8 @@ var resolution = function(match) {
       }
 
       // Pre Process attack
-      if (currCard.constructor === Attack) {
+      //if (currCard.constructor === Attack) {
+      if (currCard.isAttack) {
         currPlayer.setUnblockable();
       }
     }
@@ -50,7 +52,8 @@ var resolution = function(match) {
       var currCard = currPlayer.getCardInHand();
       //if(currCard.cost > currPlayer.stamina) continue;
 
-      if (currCard.constructor === Attack) {
+      //if (currCard.constructor === Attack) {
+      if (currCard.isAttack) {
         oppoPlayer.receiveDamage(currCard.power, currCard.target, currPlayer);
         //if(currCard.target == 'Head') {oppoPlayer.headLane.receiveDamage(currCard.damage)};
         //if(currCard.target == 'Body') {oppoPlayer.bodyLane.receiveDamage(currCard.damage)};

@@ -3,7 +3,7 @@
  */
 class Card {
 
-    constructor(id, part, name, target, power, special, cost) {
+    constructor(id, part, name, target, power, special, cost, isAttack, isBlock, isCounter) {
         console.log('Creating Card');
         this.id = id;
         this.part = part;
@@ -12,6 +12,9 @@ class Card {
         this.power = power;
         this.special = special;
         this.cost = cost;
+        this.isAttack = isAttack;
+        this.isBlock = isBlock;
+        this.isCounter = isCounter;
     }
 }
 

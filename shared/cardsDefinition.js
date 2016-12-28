@@ -30,7 +30,8 @@ class CardsDefinition {
             cardDef.target,
             cardDef.power,
             cardDef.special,
-            cardDef.cost
+            cardDef.cost,
+            true, false, false
         );
     }else if(cardDef.type == 'Block'){
         return new Block(
@@ -40,7 +41,8 @@ class CardsDefinition {
             cardDef.target,
             cardDef.power,
             cardDef.special,
-            cardDef.cost
+            cardDef.cost,
+            false, true, false
         );
     }else if(cardDef.type == 'Counter'){
         return new Counter(
@@ -50,7 +52,8 @@ class CardsDefinition {
             cardDef.target,
             cardDef.power,
             cardDef.special,
-            cardDef.cost
+            cardDef.cost,
+            true, false, true
         );
     }else{
       console.log("Missing card with id " + id + ".");
