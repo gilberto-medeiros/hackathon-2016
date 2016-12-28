@@ -39,15 +39,20 @@ class Player {
         this.messageList.push(newMessage);
     }
 
+    getStamina() {
+      if (this.stamina > 10) {
+          return 10;
+      }
+      if (this.stamina < 0) {
+          return 0;
+      }
+      return this.stamina;
+    }
+
     sendMessageList() {
-      //console.log(this.deck.hand);
-        if (this.stamina > 10) {
-            this.stamina = 10;
-        }
-        if (this.stamina < 0) {
-            this.stamina = 0;
-        }
-        this.pushMessageToClient({'setStamina': this.stamina});
+      this.stamina = this.getStamina();
+        this.pushMessageToClient({'setStamina': this.getStamina()});
+        this.pushMessageToClient({'setOpponentStamina': this.match.getOpponent(this.matchIndex).getStamina()});
         console.log("player " + this.id + " will get messages ");
         console.log(this.messageList);
         this.socket.emit('event', this.messageList);

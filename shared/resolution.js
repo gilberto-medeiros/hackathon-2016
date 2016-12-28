@@ -4,15 +4,13 @@ var Counter = require('../shared/counter')
 
 var resolution = function(match) {
 
-  var getOpponent = function(index) {
-    return match.players[index == 0 ? 1 : 0];
-  }
+
 
   // Pre process
   for (i in match.players) {
     // Get players
     var currPlayer = match.players[i];
-    var oppoPlayer = getOpponent(i);
+    var oppoPlayer = match.getOpponent(i);
 
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
@@ -46,7 +44,7 @@ var resolution = function(match) {
   for (i in match.players) {
     // Get players
     var currPlayer = match.players[i];
-    var oppoPlayer = getOpponent(i);
+    var oppoPlayer = match.getOpponent(i);
 
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
@@ -64,7 +62,7 @@ var resolution = function(match) {
   // Reset
   for (i in match.players) {
     var currPlayer = match.players[i];
-    var oppoPlayer = getOpponent(i);
+    var oppoPlayer = match.getOpponent(i);
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
       //if(currCard.cost <= currPlayer.stamina) {

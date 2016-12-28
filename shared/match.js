@@ -7,7 +7,6 @@ class Match {
         this.players = [];
         this.turn = 0;
         this.resolution = require('../shared/resolution');
-
     }
 
     addPlayer(player) {
@@ -37,7 +36,9 @@ class Match {
             console.log('player '+ player.id + ' changed turn');
             ref.nextTurn();
         })
+        player.matchIndex = this.players.length;
         this.players.push(player);
+        player.match = this;
         return true;
     }
 
@@ -63,6 +64,7 @@ class Match {
     sendHandsToPlayers() {
         for (var playerIndex in this.players) {
             var player = this.players[playerIndex];
+            //player.socket.emit('event', {'setHand': player.deck.hand, 'setStamina': player.getStamina(), 'setOpponentStamina': this.getOpponent(player.matchIndex).getStamina()});
             player.socket.emit('event', {'setHand': player.deck.hand});
         }
     }
@@ -85,8 +87,6 @@ class Match {
         for (var playerIndex in this.players) {
             var player = this.players[playerIndex];
             player.tick();
-            // send stamina update
-            //player.socket.emit('event', {'setStamina': player.stamina});
         }
         this.resolution(this);
         for (var playerIndex in this.players) {
@@ -98,14 +98,12 @@ class Match {
     start(){
         console.log('match is starting');
         var waitInterval;
-        //var ref = this;
         this.sendHandsToPlayers();
         this.nextTurn();
-        /*
-        setInterval(function(){
-            ref.nextTurn();
-        }, 1000, 1000);
-        */
+    }
+
+    getOpponent(index) {
+      return this.players[index == 0 ? 1 : 0];
     }
 }
 

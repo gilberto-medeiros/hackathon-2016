@@ -39,6 +39,11 @@ function processSingleEvent(msg) {
 
   if ('setStamina' in msg) {
     staminaBar.width = staminaBarUnitScreenWidth*msg.setStamina;
+    //HighlightCard(-1);
+  }
+  if ('setOpponentStamina' in msg) {
+    remoteStaminaBar.width = -remoteSstaminaBarUnitScreenWidth*msg.setOpponentStamina;
+    //HighlightCard(-1);
   }
 
   if ('setHand' in msg) {
@@ -128,6 +133,21 @@ function addResourcesFromCards(resources) {
   return resources;
 }
 
+function createStaminaBar(ref, unitWidth, height) {
+  var sb = cc.LayerColor.create(cc.color(0,0,255,255), unitWidth, height);
+  sb.x = 15;
+  sb.y = 250;
+
+  var staminaBarBG = cc.LayerColor.create(cc.color(100,100,100,200), unitWidth*10 + 10, -(sb.height + 10));
+  staminaBarBG.x = sb.x - 5;
+  staminaBarBG.y = sb.y + sb.height + 5
+  sb.bg = staminaBarBG;
+
+  ref.addChild(staminaBarBG, -1);
+  ref.addChild(sb, 2);
+  return sb;
+}
+
 $.getJSON('../shared/cards.json', function(response){
     cardDefs = response;
 
@@ -148,16 +168,16 @@ $.getJSON('../shared/cards.json', function(response){
                 sprite.setPosition(size.width / 2, size.height / 2);
                 this.addChild(sprite, -10);
 
-                staminaBar = cc.LayerColor.create(cc.color(0,0,255,255), staminaBarUnitScreenWidth, 30);
-                staminaBar.x = 15;
-                staminaBar.y = 250;
+                // local stamina
+                staminaBar = createStaminaBar(this, staminaBarUnitScreenWidth, 30);
 
-                var staminaBarBG = cc.LayerColor.create(cc.color(100,100,100,200), staminaBarUnitScreenWidth*10 + 10, staminaBar.height + 10);
-                staminaBarBG.x = staminaBar.x - 5;
-                staminaBarBG.y = staminaBar.y - 5
-
-                this.addChild(staminaBarBG, 1);
-                this.addChild(staminaBar, 2);
+                // remote stamina
+                remoteStaminaBar = createStaminaBar(this, remoteSstaminaBarUnitScreenWidth, 15);
+                remoteStaminaBar.x = size.width - staminaBar.x;
+                //remoteStaminaBar.y = size.height - 200;
+                remoteStaminaBar.bg.width = -remoteStaminaBar.bg.width;
+                remoteStaminaBar.bg.x = remoteStaminaBar.x + 5;
+                remoteStaminaBar.bg.y = remoteStaminaBar.y + remoteStaminaBar.height + 5;
 
                 var shadow = new cc.Sprite("art/Interface__0000s_0001_Down-Interface.png");
                 shadow.ignoreAnchor = true;
