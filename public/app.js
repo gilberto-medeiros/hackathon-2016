@@ -66,6 +66,11 @@ function processSingleEvent(msg) {
     SpawnCard(msg.addCard, 4);
   }
 
+  if ('rejectCard' in msg) {
+    //$('#messages').append($('<li>').text('hand ' + msg.setHand));
+    HighlightCard(-1);
+  }
+
     if ('blockDamage' in msg) {
         if (msg.blockDamage.localPlayer) {
           localPlayer.laneLife.addBlockDamage(msg.blockDamage.lane, msg.blockDamage.value);

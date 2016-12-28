@@ -84,6 +84,7 @@ class Match {
     }
 
     nextTurn(){
+      console.log("######## Turn Start ########");
         for (var playerIndex in this.players) {
             var player = this.players[playerIndex];
             player.tick();

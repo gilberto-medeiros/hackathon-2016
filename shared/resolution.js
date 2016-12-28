@@ -14,16 +14,11 @@ var resolution = function(match) {
 
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
-      /*
+
       if(currCard.cost > currPlayer.stamina) {
-        console.log('Ignoring card with cost ' + currCard.cost + ' for ' + currPlayer.stamina + ' stamina ' );
         continue;
       }
-      */
 
-      // Process stamina
-      staminaCost = currCard.cost;
-      currPlayer.addStamina(-staminaCost);
 
       // Pre Process Blocks
       //if (currCard.constructor === Block) {
@@ -55,7 +50,15 @@ var resolution = function(match) {
 
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
-      //if(currCard.cost > currPlayer.stamina) continue;
+      currPlayer.consumeCard = currCard.cost <= currPlayer.stamina;
+      if(!currPlayer.consumeCard) {
+        console.log('Ignoring card with cost ' + currCard.cost + ' for ' + currPlayer.stamina + ' stamina ' );
+        continue;
+      }
+
+      // Process stamina
+      staminaCost = currCard.cost;
+      currPlayer.addStamina(-staminaCost);
 
       //if (currCard.constructor === Attack) {
       if (currCard.isAttack && (!currPlayer.attackWillBeCountered) || currCard.isCounter) {
@@ -72,10 +75,13 @@ var resolution = function(match) {
     var currPlayer = match.players[i];
     var oppoPlayer = match.getOpponent(i);
     if(currPlayer.currHandIndex != -1) {
-      var currCard = currPlayer.getCardInHand();
-      //if(currCard.cost <= currPlayer.stamina) {
+      //var currCard = currPlayer.getCardInHand();
+      if(currPlayer.consumeCard) {
         currPlayer.updateCardMessage(oppoPlayer);
-      //}
+      }
+      else {
+        currPlayer.pushMessageToClient({'rejectCard':currPlayer.currHandIndex});
+      }
     }
     currPlayer.reset();
   }
