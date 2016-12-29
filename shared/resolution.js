@@ -77,7 +77,11 @@ var resolution = function(match) {
     var oppoPlayer = match.getOpponent(i);
     if(currPlayer.currHandIndex != -1) {
       var currCard = currPlayer.getCardInHand();
-      if (oppoPlayer.headLane.health == 0 && currCard.special == "KO") {
+      //oppoPlayer.printStats();
+      //console.log('cardspecial '+currCard.special + " target " + currCard.target);
+      if (oppoPlayer.headLane.health == 0 && currCard.special == "KO" && currCard.target == "Head" || // ko to head
+          oppoPlayer.bodyLane.health == 0 && currCard.special == "KO" && currCard.target == "Body" || // ko to body
+          oppoPlayer.headLane.health == 0 && oppoPlayer.bodyLane.health == 0 && oppoPlayer.legsLane.health == 0) { // win by 0 stats
         victory += currPlayer.matchIndex+1;
       }
     }
