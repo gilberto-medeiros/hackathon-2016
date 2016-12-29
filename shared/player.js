@@ -114,6 +114,13 @@ class Player {
         this.deck.playCard(this.currHandIndex);
         this.pushMessageToClient({'addCard': this.deck.getCardInHand(4).id});
     }
+
+    printStats() {
+      console.log("player idx " + this.matchIndex + " id=" + this.id);
+      console.log("head " + this.headLane.health + " Blk->" + this.headLane.block);
+      console.log("body " + this.bodyLane.health + " Blk->" + this.bodyLane.block);
+      console.log("legs " + this.legsLane.health + " Blk->" + this.legsLane.block);
+    }
 }
 
 module.exports = Player;
