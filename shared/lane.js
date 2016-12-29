@@ -7,6 +7,18 @@ class Lane {
     this.isBlockable = true;
   }
 
+  inflictTrueDamage(damage) {
+    if (damage > this.health) {
+      var dif = this.health;
+      this.health = 0;
+      return dif;
+    }
+    else {
+      this.health -= damage;
+      return damage;
+    }
+  }
+
   receiveDamage(damage, player, lane, oppoPlayer) {
     if(this.isBlockable){
       if(this.block - damage >= 0){
@@ -20,15 +32,18 @@ class Lane {
           oppoPlayer.pushMessageToClient({'blockDamage': {'lane': lane , 'value': this.block, 'localPlayer': false}});
         }
         this.block = 0;
-        this.health -= dif;
-          player.pushMessageToClient({'healthDamage': {'lane': lane , 'value': dif, 'localPlayer': true}});
-          oppoPlayer.pushMessageToClient({'healthDamage': {'lane': lane , 'value': dif, 'localPlayer': false}});
+        //this.health -= dif;
+        var realDif = this.inflictTrueDamage(dif);
+          player.pushMessageToClient({'healthDamage': {'lane': lane , 'value': realDif, 'localPlayer': true}});
+          oppoPlayer.pushMessageToClient({'healthDamage': {'lane': lane , 'value': realDif, 'localPlayer': false}});
       }
     }else{
-      this.health -= damage;
-        player.pushMessageToClient({'healthDamage': {'lane': lane , 'value': damage, 'localPlayer': true}});
-        oppoPlayer.pushMessageToClient({'healthDamage': {'lane': lane , 'value': damage, 'localPlayer': false}});
+      //this.health -= damage;
+      var realDif = this.inflictTrueDamage(damage);
+        player.pushMessageToClient({'healthDamage': {'lane': lane , 'value': realDif, 'localPlayer': true}});
+        oppoPlayer.pushMessageToClient({'healthDamage': {'lane': lane , 'value': realDif, 'localPlayer': false}});
     }
+
   }
 
   stackBlock(block, player, lane, oppoPlayer) {
