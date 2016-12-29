@@ -1,8 +1,8 @@
 class Lane {
 
-  constructor() {
-    this.baseHealth = 10
-    this.health = 10;
+  constructor(health) {
+    this.baseHealth = health;
+    this.health = health;
     this.block = 0;
     this.isBlockable = true;
   }

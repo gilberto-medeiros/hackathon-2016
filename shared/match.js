@@ -65,7 +65,8 @@ class Match {
         for (var playerIndex in this.players) {
             var player = this.players[playerIndex];
             //player.socket.emit('event', {'setHand': player.deck.hand, 'setStamina': player.getStamina(), 'setOpponentStamina': this.getOpponent(player.matchIndex).getStamina()});
-            player.socket.emit('event', {'setHand': player.deck.hand});
+            player.socket.emit('event', {'setHand': {'hand': player.deck.hand, 'head': player.headLane.health,'body': player.bodyLane.health,'legs': player.legsLane.health}});
+            player.sendMessageList();
         }
     }
 

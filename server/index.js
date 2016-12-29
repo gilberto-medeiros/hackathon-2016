@@ -29,7 +29,7 @@ io.on('connection', function(socket){
         match = new Match(++matchId);
     }
 
-    var player = new Player(deckDefinition.createDeck(), 0,0,0,0, playerId++,matchId);
+    var player = new Player(deckDefinition.createDeck(), 10,15,20,0, playerId++,matchId);
 
     player.socket = socket;
 

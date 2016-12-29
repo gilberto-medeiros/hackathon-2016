@@ -48,9 +48,9 @@ function processSingleEvent(msg) {
 
   if ('setHand' in msg) {
     $('#messages').append($('<li>').text('hand ' + msg.setHand));
-    CreateHand(msg.setHand);
-    localPlayer = new PlayerVisual(true);
-    remotePlayer = new PlayerVisual(false);
+    CreateHand(msg.setHand.hand);
+    localPlayer = new PlayerVisual(true, msg.setHand.head, msg.setHand.body, msg.setHand.legs);
+    remotePlayer = new PlayerVisual(false, msg.setHand.head, msg.setHand.body, msg.setHand.legs);
   }
 
   if ('playCard' in msg) {

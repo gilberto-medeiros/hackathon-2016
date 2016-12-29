@@ -1,10 +1,10 @@
 class PlayerVisual {
-  constructor(isLocalPlayer) {
+  constructor(isLocalPlayer, headLife, bodyLife, legLife) {
     this.isLocalPlayer = isLocalPlayer;
 
     //this.createVisual();
 
-    this.laneLife = new LaneLife(isLocalPlayer, 20, 30, 40);
+    this.laneLife = new LaneLife(isLocalPlayer, headLife, bodyLife, legLife);
     if (!isLocalPlayer) {
       var size = cc.director.getWinSize();
       this.laneLife.node.reduce();
