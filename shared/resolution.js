@@ -70,6 +70,36 @@ var resolution = function(match) {
     }
   }
 
+  // check victory condition
+  var victory = 0;
+  for (i in match.players) {
+    var currPlayer = match.players[i];
+    var oppoPlayer = match.getOpponent(i);
+    if(currPlayer.currHandIndex != -1) {
+      var currCard = currPlayer.getCardInHand();
+      if (oppoPlayer.headLane.health == 0 && currCard.special == "KO") {
+        victory += currPlayer.matchIndex+1;
+      }
+    }
+  }
+
+  switch (victory) {
+    case 0:
+
+      break;
+    case 1:
+        console.log("Game ended: Player 1 won!");
+      break;
+    case 2:
+        console.log("Game ended: Player 2 won!");
+      break;
+    case 3:
+        console.log("Game ended in a tie");
+      break;
+    default:
+
+  }
+
   // Reset
   for (i in match.players) {
     var currPlayer = match.players[i];
