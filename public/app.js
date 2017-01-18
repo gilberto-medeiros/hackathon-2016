@@ -38,12 +38,22 @@ function processSingleEvent(msg) {
   }
 
   if ('setStamina' in msg) {
+
+    if (staminaBar.value > msg.setStamina) {
+      var staminaEffect = cc.LayerColor.create(cc.color(255,255,255,100), staminaBarUnitScreenWidth*(staminaBar.value-msg.setStamina), staminaBar.height);
+      staminaEffect.x = staminaBar.x + msg.setStamina*staminaBarUnitScreenWidth;
+      staminaEffect.y = staminaBar.y;
+      staminaBar.parent.addChild(staminaEffect, staminaBar.zOrder);
+      staminaEffect.runAction(new cc.Sequence(//[new cc.ScaleTo(0.5, 0, 1),
+                                        [new cc.Spawn([new cc.ScaleTo(0.3, 1, 0), cc.moveBy(0.3, cc.p(0, -20))]),
+                                      new cc.RemoveSelf(true)]));
+    }
+
+    staminaBar.value = msg.setStamina;
     staminaBar.width = staminaBarUnitScreenWidth*msg.setStamina;
-    //HighlightCard(-1);
   }
   if ('setOpponentStamina' in msg) {
     remoteStaminaBar.width = -remoteSstaminaBarUnitScreenWidth*msg.setOpponentStamina;
-    //HighlightCard(-1);
   }
 
   if ('setHand' in msg) {
@@ -143,9 +153,10 @@ function createStaminaBar(ref, unitWidth, height) {
   sb.x = 15;
   sb.y = 250;
 
-  var staminaBarBG = cc.LayerColor.create(cc.color(100,100,100,200), unitWidth*10 + 10, -(sb.height + 10));
+  sb.value = 10;
+  var staminaBarBG = cc.LayerColor.create(cc.color(100,100,100,200), unitWidth*sb.value + 10, -(sb.height + 10));
   staminaBarBG.x = sb.x - 5;
-  staminaBarBG.y = sb.y + sb.height + 5
+  staminaBarBG.y = sb.y + sb.height + 5;
   sb.bg = staminaBarBG;
 
   ref.addChild(staminaBarBG, -1);
