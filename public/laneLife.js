@@ -6,25 +6,25 @@ class LaneLife {
     this.setBodyHealth(bodyHealth);
     this.setLegHealth(legHealth);
 
-
-
     this.node = this.createVisual();
-
-
 
     this.headBar = new Bar(250/headHealth, headHealth, 20, headHealth);
     this.bodyBar = new Bar(250/bodyHealth, bodyHealth, 20, bodyHealth);
     this.legBar = new Bar(250/legHealth, legHealth, 20, legHealth);
+
     gameScene.addChild(this.headBar);
     gameScene.addChild(this.bodyBar);
     gameScene.addChild(this.legBar);
 
     if (this.isLocalPlayer) {
       this.headBar.x = this.bodyBar.x = this.legBar.x = 50;
+      this.headBar.bar.color = this.bodyBar.bar.color = this.legBar.bar.color = cc.color(255, 60, 0, 0);
     }
     else {
       this.headBar.x = this.bodyBar.x = this.legBar.x = cc.director.getWinSize().width - 50;
       this.headBar.scaleX = this.bodyBar.scaleX = this.legBar.scaleX = -1;
+      //this.headBar.bar.color = this.bodyBar.bar.color = this.legBar.bar.color = cc.color(255, 220, 190, 0);
+      this.headBar.bar.color = this.bodyBar.bar.color = this.legBar.bar.color = cc.color(150, 100, 50, 0);
     }
 
     this.headBar.y = 600;
