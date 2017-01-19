@@ -9,6 +9,27 @@ class LaneLife {
 
 
     this.node = this.createVisual();
+
+
+
+    this.headBar = new Bar(250/headHealth, headHealth, 20, headHealth);
+    this.bodyBar = new Bar(250/bodyHealth, bodyHealth, 20, bodyHealth);
+    this.legBar = new Bar(250/legHealth, legHealth, 20, legHealth);
+    gameScene.addChild(this.headBar);
+    gameScene.addChild(this.bodyBar);
+    gameScene.addChild(this.legBar);
+
+    if (this.isLocalPlayer) {
+      this.headBar.x = this.bodyBar.x = this.legBar.x = 50;
+    }
+    else {
+      this.headBar.x = this.bodyBar.x = this.legBar.x = cc.director.getWinSize().width - 50;
+      this.headBar.scaleX = this.bodyBar.scaleX = this.legBar.scaleX = -1;
+    }
+
+    this.headBar.y = 600;
+    this.bodyBar.y = 450;
+    this.legBar.y = 300;
   }
 
   setHeadHealth(newValue) {
@@ -18,6 +39,10 @@ class LaneLife {
       var sprite = this.headLabel.getChildren()[0];
       sprite.x = this.headLabel.width*0.5;
       sprite.y = this.headLabel.height*0.5;
+    }
+
+    if (this.headBar != undefined) {
+      this.headBar.setProgress(newValue);
     }
   }
 
@@ -29,6 +54,10 @@ class LaneLife {
       sprite.x = this.bodyLabel.width*0.5;
       sprite.y = this.bodyLabel.height*0.5;
     }
+
+    if (this.bodyBar != undefined) {
+      this.bodyBar.setProgress(newValue);
+    }
   }
 
   setLegHealth(newValue) {
@@ -38,6 +67,10 @@ class LaneLife {
       var sprite = this.legLabel.getChildren()[0];
       sprite.x = this.legLabel.width*0.5;
       sprite.y = this.legLabel.height*0.5;
+    }
+
+    if (this.legBar != undefined) {
+      this.legBar.setProgress(newValue);
     }
   }
 
