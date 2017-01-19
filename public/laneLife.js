@@ -143,16 +143,39 @@ class LaneLife {
                                       new cc.ScaleBy(0.15, 0.5)]));
   }
 
+  isBlockAvailable(blockLabel) {
+    var value = parseInt(blockLabel.string);
+    return value > 0;
+  }
+
   addBlockDamage(lane, diff) {
     if (lane == "Head") {
       this.headLabel.blockLabel.string = parseInt(this.headLabel.blockLabel.string) - diff;
       this.highlightTextNode(this.headLabel.blockLabel);
+      if (this.isBlockAvailable(this.headLabel.blockLabel)) {
+        this.headBar.barBG.setZOrder(3);
+      }
+      else {
+        this.headBar.barBG.setZOrder(1);
+      }
     } else if (lane == "Body") {
       this.bodyLabel.blockLabel.string = parseInt(this.bodyLabel.blockLabel.string) - diff;
       this.highlightTextNode(this.bodyLabel.blockLabel);
+      if (this.isBlockAvailable(this.bodyLabel.blockLabel)) {
+        this.bodyBar.barBG.setZOrder(3);
+      }
+      else {
+        this.bodyBar.barBG.setZOrder(1);
+      }
     } else if (lane == "Legs") {
       this.legLabel.blockLabel.string = parseInt(this.legLabel.blockLabel.string) - diff;
       this.highlightTextNode(this.legLabel.blockLabel);
+      if (this.isBlockAvailable(this.legLabel.blockLabel)) {
+        this.legBar.barBG.setZOrder(3);
+      }
+      else {
+        this.legBar.barBG.setZOrder(1);
+      }
     }
   }
 

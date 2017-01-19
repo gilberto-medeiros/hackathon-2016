@@ -33,8 +33,8 @@ Bar = cc.Node.extend({
       var bg = cc.LayerColor.create(cc.color(100,100,100,200), this.unitSize*this.maxUnits + 10, (this.height + 10));
       bg.x = - 5;
       bg.y = -5;
-      this.addChild(bg);
-      this.addChild(sb);
+      this.addChild(bg, 1);
+      this.addChild(sb, 2);
       this.bar = sb;
       this.barBG = bg;
     },
