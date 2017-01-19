@@ -36,6 +36,7 @@ Bar = cc.Node.extend({
       this.addChild(bg);
       this.addChild(sb);
       this.bar = sb;
+      this.barBG = bg;
     },
     /*setPositionX: function(x){
       cc.Node.prototype.setPositionX.call(this, x);

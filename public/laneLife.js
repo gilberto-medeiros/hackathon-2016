@@ -1,4 +1,11 @@
 class LaneLife {
+  positionBlockLabel(label, bar) {
+    label.removeFromParentAndCleanup(false);
+    label.x = bar.barBG._contentSize.width + 15;
+    label.y = 8;
+    bar.addChild(label);
+  }
+
   constructor(isLocalPlayer, headHealth, bodyHealth, legHealth) {
     this.isLocalPlayer = isLocalPlayer;
 
@@ -16,13 +23,17 @@ class LaneLife {
     gameScene.addChild(this.bodyBar);
     gameScene.addChild(this.legBar);
 
+    this.positionBlockLabel(this.headLabel.blockLabel, this.headBar);
+    this.positionBlockLabel(this.bodyLabel.blockLabel, this.bodyBar);
+    this.positionBlockLabel(this.legLabel.blockLabel, this.legBar);
+
     if (this.isLocalPlayer) {
       this.headBar.x = this.bodyBar.x = this.legBar.x = 50;
       this.headBar.bar.color = this.bodyBar.bar.color = this.legBar.bar.color = cc.color(255, 60, 0, 0);
     }
     else {
       this.headBar.x = this.bodyBar.x = this.legBar.x = cc.director.getWinSize().width - 50;
-      this.headBar.scaleX = this.bodyBar.scaleX = this.legBar.scaleX = -1;
+      this.headBar.scaleX = this.bodyBar.scaleX = this.legBar.scaleX = this.headLabel.blockLabel.scaleX = this.bodyLabel.blockLabel.scaleX = this.legLabel.blockLabel.scaleX = -1;
       //this.headBar.bar.color = this.bodyBar.bar.color = this.legBar.bar.color = cc.color(255, 220, 190, 0);
       this.headBar.bar.color = this.bodyBar.bar.color = this.legBar.bar.color = cc.color(150, 100, 50, 0);
     }
@@ -84,7 +95,8 @@ class LaneLife {
     label.addChild(sprite, -1);
     parent.addChild(label);
 
-    var blockLabel = cc.LabelTTF.create("0", "Arial", 26);
+    var blockLabel = cc.LabelTTF.create("0", "Arial", 32);
+    blockLabel.enableStroke(cc.color(0,0,0,255), 3);
     label.addChild(blockLabel);
     label.blockLabel = blockLabel;
 
